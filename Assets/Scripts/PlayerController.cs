@@ -17,14 +17,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
+        MovePlayer();
+    }
+
+    // Move Player by arrow keys
+    void MovePlayer()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         playerRb.AddForce(Vector3.right * horizontalInput * speed);
         playerRb.AddForce(Vector3.forward * verticalInput * speed);
-        //transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
-        //transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
-
     }
 }
