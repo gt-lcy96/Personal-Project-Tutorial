@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     private GameObject player;
     private Vector3 findPlayerPos;
 
-    public float speed = 4.0f;
+    private float speed = 0.1f;
     void Start()
     {
         player = GameObject.Find("Player").gameObject;
