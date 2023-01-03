@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             Debug.Log("Attack");
-            Vector3 spawnPos = new Vector3(transform.position.x, 1.2f, transform.position.z + 0.5f);
+            Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
             Instantiate(bulletPrefab, spawnPos, transform.rotation);
         }
     }
