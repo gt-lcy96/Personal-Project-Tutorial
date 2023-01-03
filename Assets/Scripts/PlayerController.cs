@@ -8,10 +8,9 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody playerRb;
 
-    public float speed = 1;
+    public float speed = 4;
     void Start()
     {
-        playerRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -27,7 +26,7 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        playerRb.AddForce(Vector3.right * horizontalInput * speed);
-        playerRb.AddForce(Vector3.forward * verticalInput * speed);
+        transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
     }
 }
