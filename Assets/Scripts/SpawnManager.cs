@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     {
         SpawnEnemy(0);
         SpawnEnemy(1);
-        SpawnEnemy(2);
+        // SpawnEnemy(2);
     }
 
     // Update is called once per frame

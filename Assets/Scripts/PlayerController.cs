@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(bulletPrefab, spawnPos, transform.rotation);
         } 
         else {
-            IdleAttackAnim()
+            IdleAttackAnim();
         }
     }
 
