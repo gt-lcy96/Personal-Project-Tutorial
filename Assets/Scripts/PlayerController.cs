@@ -35,16 +35,30 @@ public class PlayerController : MonoBehaviour
 
     void HandleAttack()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+
+        
+        if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Attack");
-
-            animator.SetInteger("WeaponType_int", 1);
-            animator.SetBool("Shoot_b", false);
-            animator.SetBool("Reload_b", false);
-
+            animator.SetBool("Shoot_b", true);  // set shooting animation
             Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
             Instantiate(bulletPrefab, spawnPos, transform.rotation);
+        } 
+        else {
+            IdleAttackAnim()
         }
+    }
+
+    void IdleAttackAnim() 
+    {
+        animator.SetInteger("WeaponType_int", 1);
+        animator.SetBool("Shoot_b", false);
+        animator.SetBool("Reload_b", false);
+
+    }    
+
+    void ShootingAnim()
+    {
+        
     }
 }
