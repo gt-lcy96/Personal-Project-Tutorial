@@ -5,13 +5,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update\
-    
+    private Animator animator;
     private Rigidbody playerRb;
     public GameObject bulletPrefab;
+    
 
     public float speed = 4;
     void Start()
     {
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             Debug.Log("Attack");
+
+            animator.SetInteger("WeaponType_int", 1);
+            animator.SetBool("Shoot_b", false);
+            animator.SetBool("Reload_b", false);
+
             Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
             Instantiate(bulletPrefab, spawnPos, transform.rotation);
         }
