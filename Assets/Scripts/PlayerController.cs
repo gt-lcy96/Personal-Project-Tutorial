@@ -27,19 +27,18 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        MovePlayer();
 
-        //turn the player to mouse position
-        Vector3 lookDirection = mousePos - transform.position;
-        Debug.Log("lookDirection :" + lookDirection);
+        // //turn the player to mouse position
+        // Vector3 lookDirection = mousePos - transform.position;
+        // Debug.Log("lookDirection :" + lookDirection);
+        // // float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
         // float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        Debug.Log("angle :"+ angle);
-        Vector3 euler = new Vector3(0, angle, 0);
-        Quaternion quaternion = Quaternion.Euler(0, angle, 0);
-        //playerRb.rotation = quaternion
+        // Debug.Log("angle :"+ angle);
+        // Vector3 euler = new Vector3(0, angle, 0);
+        // Quaternion quaternion = Quaternion.Euler(0, angle, 0);
+        // //playerRb.rotation = quaternion
 
-        transform.Rotate(euler * rotateSpeed * Time.deltaTime);
+        // transform.Rotate(euler * rotateSpeed * Time.deltaTime);
         // transform.Rotate(euler);
     }
 
@@ -56,7 +55,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        MovePlayer();
+        
        
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
@@ -70,6 +69,24 @@ public class PlayerController : MonoBehaviour
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
 
+        MovePlayer();
+        HandleAttack();
         
+    }
+
+    void HandleAttack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetBool("Shoot_b", true);  // set shooting animation
+            Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
+            Instantiate(bulletPrefab, spawnPos, transform.rotation);
+        } 
+        else {
+            //Idle Attack Animation Setting
+            animator.SetInteger("WeaponType_int", 1);
+            animator.SetBool("Shoot_b", false);
+            animator.SetBool("Reload_b", false);
+        }
     }
 }
