@@ -27,38 +27,17 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         firePoint = GameObject.Find("Fire Point").transform;
     }
-    private void FixedUpdate()
-    {
 
-        // //turn the player to mouse position
-        // Vector3 lookDirection = mousePos - transform.position;
-        // Debug.Log("lookDirection :" + lookDirection);
-        // // float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        // float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        // Debug.Log("angle :"+ angle);
-        // Vector3 euler = new Vector3(0, angle, 0);
-        // Quaternion quaternion = Quaternion.Euler(0, angle, 0);
-        // //playerRb.rotation = quaternion
-
-        // transform.Rotate(euler * rotateSpeed * Time.deltaTime);
-        // transform.Rotate(euler);
-    }
-
-    void MovePlayer() 
-    {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        // moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
-        // moveVelocity = moveInput * moveSpeed;
-        // transform.position += moveVelocity * Time.deltaTime;
-        transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime, Space.World);
-        transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime, Space.World);
-    }
+    
     void Update()
     {
-        
-       
+        LookAtCursor();
+        MovePlayer();
+        HandleAttack();   
+    }
+
+    void LookAtCursor()
+    {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayLength;
@@ -70,10 +49,6 @@ public class PlayerController : MonoBehaviour
 
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
-
-        MovePlayer();
-        HandleAttack();
-        
     }
 
     void HandleAttack()
@@ -91,5 +66,14 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Shoot_b", false);
             animator.SetBool("Reload_b", false);
         }
+    }
+
+    void MovePlayer() 
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime, Space.World);
     }
 }
