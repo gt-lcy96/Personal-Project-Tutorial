@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     private Transform firePoint;
 
     public float speed = 4;
-    float rotateSpeed = 40;
 
     void Start()
     {
