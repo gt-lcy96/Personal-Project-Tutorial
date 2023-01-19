@@ -4,61 +4,34 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update\
-    private Animator animator;
-    private Rigidbody playerRb;
-    public GameObject bulletPrefab;
-    
+    public float moveSpeed = 5f;
 
-    public float speed = 4;
+    private Vector3 moveInput;
+    private Vector3 moveVelocity;
+    private Camera mainCamera;
+
     void Start()
     {
-        animator = GetComponent<Animator>();
+        mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        MovePlayer();
-        HandleAttack();
-    }
+        moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
+        moveVelocity = moveInput * moveSpeed;
 
-    // Move Player by arrow keys
-    void MovePlayer()
-    {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
 
-        transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
-        transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
-    }
-
-    void HandleAttack()
-    {
-
-        
-        if (Input.GetMouseButtonDown(0))
+        if (groundPlane.Raycast(cameraRay, out rayLength))
         {
-            Debug.Log("Attack");
-            animator.SetBool("Shoot_b", true);  // set shooting animation
-            Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
-            Instantiate(bulletPrefab, spawnPos, transform.rotation);
-        } 
-        else {
-            IdleAttackAnim();
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
-    }
 
-    void IdleAttackAnim() 
-    {
-        animator.SetInteger("WeaponType_int", 1);
-        animator.SetBool("Shoot_b", false);
-        animator.SetBool("Reload_b", false);
-
-    }    
-
-    void ShootingAnim()
-    {
-        
+        transform.position += moveVelocity * Time.deltaTime;
     }
 }
