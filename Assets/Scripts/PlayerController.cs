@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveInput;
     private Vector3 moveVelocity;
     private Camera mainCamera;
+    private Transform firePoint;
 
     public float speed = 4;
     float rotateSpeed = 40;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
         playerRb = GetComponent<Rigidbody>();
+        firePoint = GameObject.Find("Fire Point").transform;
     }
     private void FixedUpdate()
     {
@@ -80,7 +82,8 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Shoot_b", true);  // set shooting animation
             Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
-            Instantiate(bulletPrefab, spawnPos, transform.rotation);
+            
+            Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         } 
         else {
             //Idle Attack Animation Setting
