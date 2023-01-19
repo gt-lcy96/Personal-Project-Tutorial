@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
         // moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
         // moveVelocity = moveInput * moveSpeed;
         // transform.position += moveVelocity * Time.deltaTime;
-        transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
-        transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
+        transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime, Space.World);
     }
     void Update()
     {
