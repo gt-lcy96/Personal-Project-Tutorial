@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("Game Manager")?.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -25,7 +25,10 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             DealDamage(other.gameObject.GetComponent<Enemy>(), bulletDmg);
             // Destroy(other.gameObject);
-            gameManager.killCount++;
+            if(gameManager != null) 
+            {
+                gameManager.killCount++;
+            }
         }
     }
 
