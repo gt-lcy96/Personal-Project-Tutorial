@@ -17,7 +17,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
+        
+        transform.Translate(findPlayerPos * speed * Time.deltaTime, Space.World);
+        
+    }
+
+    void FixedUpdate()
+    {
         findPlayerPos = (player.transform.position - transform.position).normalized;
-        transform.Translate(findPlayerPos * speed * Time.deltaTime);
+        transform.LookAt(player.transform);   
     }
 }
