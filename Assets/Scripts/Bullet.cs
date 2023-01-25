@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private GameManager gameManager;
+    public float bulletDmg = 25;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +23,14 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
-            Destroy(other.gameObject);
+            DealDamage(other.gameObject.GetComponent<Enemy>(), bulletDmg);
+            // Destroy(other.gameObject);
             gameManager.killCount++;
         }
+    }
+
+    private void DealDamage(Enemy enemy, float damage)
+    {
+        enemy.health -= damage;
     }
 }
