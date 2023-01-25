@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        MoveToPlayer();
+        
     }
 
     void UpdateHealthBar() 
