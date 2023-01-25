@@ -28,14 +28,7 @@ public class EnemyMovement : MonoBehaviour
         
             while (enabled)
             {
-                try
-                {
-                    Agent.SetDestination(Target.transform.position);
-                 }
-                 catch
-                {
-                    Debug.Log("Catch Error occurred.");
-                }
+                Agent.SetDestination(Target.transform.position);
                 yield return new WaitForSeconds(updateSpeed);
             }
        
