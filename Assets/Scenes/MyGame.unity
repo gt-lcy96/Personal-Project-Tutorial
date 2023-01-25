@@ -123,37 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &60444357
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 60444358}
-  m_Layer: 0
-  m_Name: Fire Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &60444358
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 60444357}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.185, y: 2.1230001, z: 1.499}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1958188206}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &167346535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,11 +1103,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6569964068958920743, guid: ef143f9aaf736cd4493fea14de8da826, type: 3}
   m_PrefabInstance: {fileID: 6569964067020105897}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1958188206 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6569964068959419399, guid: ef143f9aaf736cd4493fea14de8da826, type: 3}
-  m_PrefabInstance: {fileID: 6569964067020105897}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2008975294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,10 +1245,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6569964068264095335, guid: ef143f9aaf736cd4493fea14de8da826, type: 3}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6569964068958920743, guid: ef143f9aaf736cd4493fea14de8da826, type: 3}
       propertyPath: m_Name
       value: Player
