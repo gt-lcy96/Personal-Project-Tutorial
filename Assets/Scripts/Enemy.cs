@@ -17,19 +17,24 @@ public class Enemy : MonoBehaviour
     public float health;
     public GameObject healthBarUI;
     public Slider slider;
+
+    public Animator animator;
     void Start()
     {
         player = GameObject.Find("Player").gameObject;
         health = maxHealth;
         slider.direction = Slider.Direction.LeftToRight;
         slider.value = CalculateHealth();
+  
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateHealthBar();
+        
     }
+
 
     void FixedUpdate()
     {

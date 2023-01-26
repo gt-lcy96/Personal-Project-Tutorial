@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,14 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform Target;
     public float updateSpeed = 0.1f;
+    private Animator animator;
 
     private NavMeshAgent Agent;
     void Awake()
     {
         
         Agent = GetComponent<NavMeshAgent>();
-        
+        animator = GetComponent<Animator>();
 
     }
 
@@ -37,6 +39,9 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // make move animation based if Nav Agent is moving the target
+        float animMoveSpeed = Agent.velocity.magnitude > 0.01f ? 0.5f : 0;
+        animator.SetFloat("MoveSpeed",  animMoveSpeed);
+
     }
 }

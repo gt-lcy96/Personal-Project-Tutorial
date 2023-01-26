@@ -514,6 +514,7 @@ MonoBehaviour:
   health: 0
   healthBarUI: {fileID: 515677381551781872}
   slider: {fileID: 6367962429128696180}
+  animator: {fileID: 0}
 --- !u!54 &3397328943153461539
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -555,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32e777fa7bd8534ab187d099a524cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  Target: {fileID: 6569964068959419399, guid: ef143f9aaf736cd4493fea14de8da826, type: 3}
   updateSpeed: 0.1
 --- !u!195 &547618021
 NavMeshAgent:

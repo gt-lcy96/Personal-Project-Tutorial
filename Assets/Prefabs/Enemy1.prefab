@@ -884,6 +884,7 @@ GameObject:
   - component: {fileID: -1631782138589480916}
   - component: {fileID: 98741139}
   - component: {fileID: 98741140}
+  - component: {fileID: 328877437702275384}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -978,6 +979,7 @@ MonoBehaviour:
   health: 0
   healthBarUI: {fileID: 466454362620435611}
   slider: {fileID: 6417255682072578591}
+  animator: {fileID: 0}
 --- !u!54 &-7269219142231259576
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1019,7 +1021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32e777fa7bd8534ab187d099a524cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  Target: {fileID: 6569964068959419399, guid: ef143f9aaf736cd4493fea14de8da826, type: 3}
   updateSpeed: 0.1
 --- !u!195 &98741140
 NavMeshAgent:
@@ -1043,6 +1045,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &328877437702275384
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581465604404666046}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 092e3c76dc8900f48b23a69b69764619, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2581465604404666048
 GameObject:
   m_ObjectHideFlags: 0
