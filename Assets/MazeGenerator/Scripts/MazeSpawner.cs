@@ -90,5 +90,7 @@ public class MazeSpawner : MonoBehaviour {
 				}
 			}
 		}
+
+		
 	}
 }
