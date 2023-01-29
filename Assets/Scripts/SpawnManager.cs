@@ -6,6 +6,8 @@ public class SpawnManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject[] enemyPrefabs;
+    [SerializeField]
+    private GameObject[] obstaclePrefabs;
     private int enemyCount = 0;
     void Start()
     {
@@ -34,5 +36,10 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemy(int enemyIndex)
     {
         Instantiate(enemyPrefabs[enemyIndex], new Vector3(0, 0, 10), enemyPrefabs[enemyIndex].transform.rotation);
+    }
+
+    public void SpawnObstacle(int obstacleIndex, Vector3 position)
+    {
+        Instantiate(obstaclePrefabs[obstacleIndex], position, obstaclePrefabs[obstacleIndex].transform.rotation);
     }
 }
