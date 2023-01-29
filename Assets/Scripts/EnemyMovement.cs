@@ -11,6 +11,8 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator;
 
     private NavMeshAgent Agent;
+    private bool hasObstacleNearby = false;
+
     void Awake()
     {
         
@@ -27,11 +29,16 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator FollowTarget()
     {
-        
+        WaitForSeconds wait = new WaitForSeconds(updateSpeed);
             while (enabled)
             {
-                Agent.SetDestination(Target.transform.position);
-                yield return new WaitForSeconds(updateSpeed);
+                if(!hasObstacleNearby) {
+                    Agent.SetDestination(Target.transform.position);
+                    yield return wait;
+                } else {
+                    
+                }
+                
             }
        
         
@@ -43,5 +50,18 @@ public class EnemyMovement : MonoBehaviour
         float animMoveSpeed = Agent.velocity.magnitude > 0.01f ? 0.5f : 0;
         animator.SetFloat("MoveSpeed",  animMoveSpeed);
 
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.gameObject.CompareTag("Obstacle")) {
+            hasObstacleNearby = true;
+        }
+    }
+
+    private void AttackNearbyTarget()
+    {
+        // attackAnim.Play();
+        // target.dealDamage();   
     }
 }
