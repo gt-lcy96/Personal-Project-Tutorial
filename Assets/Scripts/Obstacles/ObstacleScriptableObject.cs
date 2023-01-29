@@ -1,7 +1,3 @@
-
-using UnityEngine;
-
-
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Obstacle Configuration", menuName = "ScriptableObject/Obstacle Configuration")]
