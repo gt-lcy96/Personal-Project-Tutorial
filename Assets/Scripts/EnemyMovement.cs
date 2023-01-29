@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform Target;
+    private Transform Target;
     public float updateSpeed = 0.1f;
     private Animator animator;
 
@@ -17,6 +16,7 @@ public class EnemyMovement : MonoBehaviour
         
         Agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        Target = GameObject.Find("Player").GetComponent<Transform>();
 
     }
 

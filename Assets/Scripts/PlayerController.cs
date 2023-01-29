@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveVelocity;
     private Camera mainCamera;
     private Transform firePoint;
+    private SpawnManager spawnManager;
 
     public float speed = 4;
 
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerRb = GetComponent<Rigidbody>();
         firePoint = GameObject.Find("Fire Point").transform;
+        spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
     }
 
     
@@ -32,7 +34,8 @@ public class PlayerController : MonoBehaviour
     {
         LookAtCursor();
         MovePlayer();
-        HandleAttack();   
+        HandleAttack();
+        HandleSpawnObstacle();
     }
 
     void LookAtCursor()
@@ -50,6 +53,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void HandleSpawnObstacle()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Vector3 offset = new Vector3(0, 0, -10);
+            spawnManager.SpawnObstacle(0, transform.position);
+        }
+    }
     void HandleAttack()
     {
         if (Input.GetMouseButtonDown(0))
