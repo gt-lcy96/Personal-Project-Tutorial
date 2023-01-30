@@ -40,16 +40,12 @@ public class PlayerController : MonoBehaviour
 
     void LookAtCursor()
     {
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayLength;
+        RaycastHit _hit;
+        Ray _ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (groundPlane.Raycast(cameraRay, out rayLength))
+        if (Physics.Raycast(_ray, out _hit))
         {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
-
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            transform.LookAt(new Vector3(_hit.point.x, transform.position.y, _hit.point.z));
         }
     }
 
