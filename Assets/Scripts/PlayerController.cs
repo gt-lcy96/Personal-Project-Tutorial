@@ -57,8 +57,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Vector3 offset = new Vector3(0, 0, -10);
-            spawnManager.SpawnObstacle(0, transform.position);
+            Vector3 offset = new Vector3(0, -1, 0);
+            Vector3 obstcaleSpawnPoint = new Vector3(firePoint.position.x, 1f, firePoint.position.z);
+            spawnManager.SpawnObstacle(0, obstcaleSpawnPoint + offset, transform.rotation);
         }
     }
     void HandleAttack()

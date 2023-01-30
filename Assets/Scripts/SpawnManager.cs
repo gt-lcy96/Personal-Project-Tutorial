@@ -38,8 +38,9 @@ public class SpawnManager : MonoBehaviour
         Instantiate(enemyPrefabs[enemyIndex], new Vector3(0, 0, 10), enemyPrefabs[enemyIndex].transform.rotation);
     }
 
-    public void SpawnObstacle(int obstacleIndex, Vector3 position)
+    public void SpawnObstacle(int obstacleIndex, Vector3 position, Quaternion rotation)
     {
-        Instantiate(obstaclePrefabs[obstacleIndex], position, obstaclePrefabs[obstacleIndex].transform.rotation);
+        // Instantiate(obstaclePrefabs[obstacleIndex], position, obstaclePrefabs[obstacleIndex].transform.rotation);
+        Instantiate(obstaclePrefabs[obstacleIndex], position, rotation);
     }
 }
