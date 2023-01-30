@@ -10,9 +10,13 @@ public class EnemyMovement : MonoBehaviour
     public float updateSpeed = 0.1f;
     [SerializeField]
     private Animator animator;
-
+    private Animation animation;
     private NavMeshAgent Agent;
     public bool hasObstacleNearby = false;
+
+    private const string WALK_ANIM = "walknormal";
+    private const string ATTACK = "attack";
+
 
     void Awake()
     {
@@ -20,7 +24,8 @@ public class EnemyMovement : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         target = GameObject.Find("Player").GetComponent<Transform>();
-
+        animation = GetComponent<Animation>();
+        animation?.Play(WALK_ANIM);
     }
 
     void Start()
@@ -65,7 +70,10 @@ public class EnemyMovement : MonoBehaviour
     {
         // attackAnim.Play();
         animator.SetTrigger("Attack");
-
+        // if (animation != null)
+        // {
+        // }
+            animation?.Play("attack01");
         // target.dealDamage();   
     }
 }
