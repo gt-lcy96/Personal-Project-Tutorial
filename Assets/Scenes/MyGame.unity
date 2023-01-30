@@ -1161,7 +1161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 2581465604404666046, guid: ccf2ad6b39135ab4fadf0f091faaa13f, type: 3}
   - {fileID: 112144020124207033, guid: efcda6500e25ece409494d5451db9212, type: 3}
   obstaclePrefabs:
   - {fileID: 8090313998990565304, guid: 259d7c37ae0ab80499b4b033cfb8024d, type: 3}

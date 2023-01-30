@@ -29,7 +29,7 @@ public class SpawnManager : MonoBehaviour
         while(enemyCount < 15)
         {
             yield return new WaitForSeconds(0.5f);
-            SpawnEnemy(Random.Range(0, 2));
+            SpawnEnemy(Random.Range(0, enemyPrefabs.Length));
             enemyCount++;
         }
     }
