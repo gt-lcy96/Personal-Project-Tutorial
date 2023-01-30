@@ -6,19 +6,20 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour
 {
-    private Transform Target;
+    public Transform target;
     public float updateSpeed = 0.1f;
+    [SerializeField]
     private Animator animator;
 
     private NavMeshAgent Agent;
-    private bool hasObstacleNearby = false;
+    public bool hasObstacleNearby = false;
 
     void Awake()
     {
         
         Agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        Target = GameObject.Find("Player").GetComponent<Transform>();
+        target = GameObject.Find("Player").GetComponent<Transform>();
 
     }
 
@@ -32,12 +33,13 @@ public class EnemyMovement : MonoBehaviour
         WaitForSeconds wait = new WaitForSeconds(updateSpeed);
             while (enabled)
             {
-                if(!hasObstacleNearby) {
-                    Agent.SetDestination(Target.transform.position);
-                    yield return wait;
-                } else {
-                    
+
+                Agent.SetDestination(target.transform.position);                
+                if(hasObstacleNearby)
+                {
+                    AttackNearbyTarget();
                 }
+                yield return wait;
                 
             }
        
@@ -52,16 +54,18 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other) 
-    {
+    void OnCollisionEnter(Collision other) {
         if(other.gameObject.CompareTag("Obstacle")) {
             hasObstacleNearby = true;
+            // Target = other.gameObject.transform;
         }
     }
 
-    private void AttackNearbyTarget()
+    public void AttackNearbyTarget()
     {
         // attackAnim.Play();
+        animator.SetTrigger("Attack");
+
         // target.dealDamage();   
     }
 }
