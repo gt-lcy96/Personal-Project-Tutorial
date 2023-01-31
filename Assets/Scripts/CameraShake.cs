@@ -37,6 +37,11 @@ public class CameraShake : MonoBehaviour
 
     private Vector3 FollowPlayerPos()
     {   
+        if (player == null)
+        {
+            return Vector3.zero;
+        }
+
         return player.transform.position + offset;
     }
 
