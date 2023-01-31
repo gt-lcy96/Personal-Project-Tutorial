@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerRb = GetComponent<Rigidbody>();
         firePoint = GameObject.Find("Fire Point").transform;
-        spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        spawnManager = GameObject.Find("Spawn Manager")?.GetComponent<SpawnManager>();
         cameraShake = mainCamera.GetComponent<CameraShake>();
     }
 
@@ -56,7 +56,10 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 offset = new Vector3(0, -1, 0);
             Vector3 obstcaleSpawnPoint = new Vector3(firePoint.position.x, 1f, firePoint.position.z);
-            spawnManager.SpawnObstacle(0, obstcaleSpawnPoint + offset, transform.rotation);
+            if(spawnManager != null)
+            {
+                spawnManager.SpawnObstacle(0, obstcaleSpawnPoint + offset, transform.rotation);
+            }
         }
     }
     void HandleAttack()
