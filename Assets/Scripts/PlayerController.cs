@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private Transform firePoint;
     private SpawnManager spawnManager;
-
+    private CameraShake cameraShake;
     public float speed = 4;
 
     void Start()
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         firePoint = GameObject.Find("Fire Point").transform;
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        cameraShake = mainCamera.GetComponent<CameraShake>();
     }
 
     
@@ -66,6 +67,8 @@ public class PlayerController : MonoBehaviour
             Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
             
             Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+            cameraShake.TriggerShake(.2f, .1f);
+
         } 
         else {
             //Idle Attack Animation Setting
