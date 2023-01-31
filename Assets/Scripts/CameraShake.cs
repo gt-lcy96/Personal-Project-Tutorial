@@ -7,26 +7,37 @@ public class CameraShake : MonoBehaviour
     private float dampingSpeed = 1.0f;
     private Vector3 initialPosition;
     private Camera mainCamera;
+    private Vector3 offset = new Vector3(0, 10, -10);
+    [SerializeField]
+    private Transform player;
+
+    public bool onCameraShake;
 
     private void Start()
     {
-        initialPosition = transform.position;
+        transform.position = FollowPlayerPos();
+        
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (shakeDuration > 0)
+        if (shakeDuration > 0 && onCameraShake)
         {
-            transform.position = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+            transform.position = FollowPlayerPos() + Random.insideUnitSphere * shakeMagnitude;
             shakeDuration -= Time.deltaTime * dampingSpeed;
         }
         else
         {
             shakeDuration = 0f;
-            transform.position = initialPosition;
+            transform.position = FollowPlayerPos();
         }
 
         
+    }
+
+    private Vector3 FollowPlayerPos()
+    {   
+        return player.transform.position + offset;
     }
 
     public void TriggerShake(float duration, float magnitude)

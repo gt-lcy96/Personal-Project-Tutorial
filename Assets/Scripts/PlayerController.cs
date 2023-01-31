@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
             Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
             
             Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-            cameraShake.TriggerShake(.2f, .1f);
+            cameraShake.TriggerShake(.05f, .1f);
 
         } 
         else {
