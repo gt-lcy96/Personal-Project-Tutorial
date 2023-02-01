@@ -9,4 +9,5 @@ public class EquipmentData : ItemData
     {
         Hoe, Axe, WateringCan, Pickaxe
     }
+    public ToolType toolType;
 }

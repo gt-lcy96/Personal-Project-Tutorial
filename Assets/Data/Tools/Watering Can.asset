@@ -15,3 +15,4 @@ MonoBehaviour:
   descripton: use for watering plant
   thumbnail: {fileID: 21300000, guid: 8fd68b8f2ce56d14493b9c151b2774c3, type: 3}
   gameModel: {fileID: 0}
+  toolType: 2

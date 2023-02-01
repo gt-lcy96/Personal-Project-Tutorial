@@ -15,3 +15,4 @@ MonoBehaviour:
   descripton: used for cutting woods
   thumbnail: {fileID: -1632690884, guid: 098c7187aaf8c8341bae68c7b93c1c07, type: 3}
   gameModel: {fileID: 0}
+  toolType: 1
