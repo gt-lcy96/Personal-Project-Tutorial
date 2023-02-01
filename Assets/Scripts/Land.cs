@@ -21,6 +21,7 @@ public class Land : MonoBehaviour
 
         //set default material for land status
         SwitchLandStatus(LandStatus.Dirt);
+        Select(false);
     }
 
     // Update is called once per frame
