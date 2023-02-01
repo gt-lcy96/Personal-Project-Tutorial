@@ -58,4 +58,15 @@ public class PlayerInteraction : MonoBehaviour
         selectedLand = land;
         land.Select(true);
     }
+
+    public void Interact()
+    {
+        if(selectedLand != null)
+        {
+            selectedLand.Interact();
+            return;
+        }
+
+        Debug.Log("Not on any land");
+    }
 }

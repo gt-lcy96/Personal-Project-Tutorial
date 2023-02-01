@@ -111,9 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40fc2c2efb485d4a9626d426bdc9e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dirtMat: {fileID: 0}
-  tilledLandMat: {fileID: 0}
-  wateredMat: {fileID: 0}
+  dirtMat: {fileID: 2100000, guid: 526b7021e13b3f4439f209012d502a5f, type: 2}
+  tilledLandMat: {fileID: 2100000, guid: 18a01fc7bbf909844ae6f0d14e8986a8, type: 2}
+  wateredMat: {fileID: 2100000, guid: bf37dc27a147647489fa935bd855362a, type: 2}
   landStatus: 0
   selected: {fileID: 4174064720517544662}
 --- !u!1 &4174064720517544662

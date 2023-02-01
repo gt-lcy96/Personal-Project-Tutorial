@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private SpawnManager spawnManager;
     private CameraShake cameraShake;
     public float speed = 4;
+    private PlayerInteraction playerInteract;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         firePoint = GameObject.Find("Fire Point").transform;
         spawnManager = GameObject.Find("Spawn Manager")?.GetComponent<SpawnManager>();
         cameraShake = mainCamera.GetComponent<CameraShake>();
+        playerInteract = GetComponentInChildren<PlayerInteraction>();
     }
 
     
@@ -37,6 +39,16 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         HandleAttack();
         HandleSpawnObstacle();
+        HandleInteract();
+    }
+
+    void HandleInteract()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("E pressed");
+            playerInteract.Interact();
+        }
     }
 
     void LookAtCursor()

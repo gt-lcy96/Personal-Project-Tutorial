@@ -15,6 +15,7 @@ public class Land : MonoBehaviour
     public LandStatus landStatus;
     public GameObject selected;
 
+
     void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -41,10 +42,18 @@ public class Land : MonoBehaviour
                 material = wateredMat;
                 break;
         }
+
+        renderer.material = material;
     }
 
     public void Select(bool toggle)
     {
         selected.SetActive(toggle);
+    }
+
+    public void Interact()
+    {
+        SwitchLandStatus(LandStatus.tilledLand);
+        Debug.Log("Land.Interact");
     }
 }
