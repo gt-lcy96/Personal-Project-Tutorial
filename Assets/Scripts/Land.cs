@@ -13,6 +13,7 @@ public class Land : MonoBehaviour
     private Material dirtMat, tilledLandMat, wateredMat;
     new Renderer renderer;
     public LandStatus landStatus;
+    public GameObject selected;
 
     void Start()
     {
@@ -39,5 +40,10 @@ public class Land : MonoBehaviour
                 material = wateredMat;
                 break;
         }
+    }
+
+    public void Select(bool toggle)
+    {
+        selected.SetActive(toggle);
     }
 }
