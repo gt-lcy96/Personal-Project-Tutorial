@@ -25,7 +25,7 @@ public class InventoryManager : MonoBehaviour
     public ItemData equippedTool = null;
 
     [Header("Items")]
-    [SerializeField] private ItemData[] items = new ItemData[16];
+    [SerializeField] private ItemData[] items = new ItemData[8];
     public ItemData equippedItem = null;
 
 }
