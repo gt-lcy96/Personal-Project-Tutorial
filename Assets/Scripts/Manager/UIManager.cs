@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    
+    public static UIManager Instance { get; private set; }
     public GameObject inventoryPanel;
 
     [Header("Inventory System")]
+    // the ui slot for tools and item
     public InventorySlot[] toolSlots;
     public InventorySlot[] itemSlots;
-    public static UIManager Instance { get; private set; }
+    
+
+    //Item info box
+    public TextMeshProUGUI itemNameText;
+    public TextMeshProUGUI itemDescriptionText;
 
     private void Awake()
     {
@@ -36,6 +42,7 @@ public class UIManager : MonoBehaviour
         RenderInventoryPanel(itemSlots, InventoryManager.Instance.items);
     }
 
+
     void RenderInventoryPanel(InventorySlot[] uiSlot, ItemData[] itemData)
     {
         for (int i = 0; i < uiSlot.Length; i++)
@@ -44,9 +51,23 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
     public void ToggleInventoryPanel()
     {
         inventoryPanel.SetActive(!inventoryPanel.activeSelf);
     }
 
+    public void DisplayItemInfo(ItemData data)
+    {
+        if(data == null)
+        {
+            itemNameText.text = "";
+            itemDescriptionText.text = "";
+
+            return;
+        }
+
+        itemNameText.text = data.name;
+        itemDescriptionText.text = data.descripton;
+    }
 }
