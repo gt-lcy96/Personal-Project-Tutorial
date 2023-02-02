@@ -28,4 +28,33 @@ public class InventoryManager : MonoBehaviour
     public ItemData[] items = new ItemData[8];
     public ItemData equippedItem = null;
 
+    
+    public void InventoryToHand(int slotIndex, InventorySlot.InventoryType type)
+    {
+        if(type == InventorySlot.InventoryType.Item)
+        {
+            // Cache the Inventory slot ItemData from InventoryManager
+            ItemData itemToEquip = items[slotIndex];
+
+            // Change the Inventory Slot to the Hand's
+            items[slotIndex] = equippedItem;
+
+            // Change the Hand's Slot to Inventory
+            equippedItem = itemToEquip;
+        } else 
+        {
+            ItemData toolToEquip = tools[slotIndex];
+
+            // Change the Inventory Slot to the Hand's
+            tools[slotIndex] = equippedTool;
+
+            // Change the Hand's Slot to Inventory
+            equippedTool = toolToEquip;
+        }
+    }
+
+    public void HandToInventory(InventorySlot.InventoryType type)
+    {
+
+    }
 }

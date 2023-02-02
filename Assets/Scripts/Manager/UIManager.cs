@@ -13,6 +13,13 @@ public class UIManager : MonoBehaviour
     
     [Header("Inventory System")]
     public GameObject inventoryPanel;
+
+    // The tool equip slot UI on the Inventory panel
+    public HandInventorySlot toolHandSlot;
+
+    // The item equip slot UI on the Inventory panel
+    public HandInventorySlot itemHandSlot;
+
     // the ui slot for tools and item
     public InventorySlot[] toolSlots;
     public InventorySlot[] itemSlots;
@@ -37,6 +44,16 @@ public class UIManager : MonoBehaviour
     }
     private void Start() {
         inventoryPanel.SetActive(false);
+        AsignSlotIndexes();
+    }
+
+    public void AsignSlotIndexes()
+    {
+        for (int i = 0; i < toolSlots.Length; i++)
+        {
+            toolSlots[i].AssignIndex(i);
+            itemSlots[i].AssignIndex(i);
+        }
     }
 
     void Update()
@@ -62,6 +79,10 @@ public class UIManager : MonoBehaviour
         RenderInventoryPanel(toolSlots, InventoryManager.Instance.tools);
         RenderInventoryPanel(itemSlots, InventoryManager.Instance.items);
         RenderEquipTool(InventoryManager.Instance.equippedTool);
+        
+        // Render the equipped slots in Inventory Panel
+        toolHandSlot.Display(InventoryManager.Instance.equippedTool);
+        itemHandSlot.Display(InventoryManager.Instance.equippedItem);
     }
 
     void RenderInventoryPanel(InventorySlot[] uiSlot, ItemData[] itemData)
@@ -91,4 +112,5 @@ public class UIManager : MonoBehaviour
         itemNameText.text = data.name;
         itemDescriptionText.text = data.descripton;
     }
+    
 }

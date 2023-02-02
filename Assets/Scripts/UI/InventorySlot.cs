@@ -4,10 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     ItemData itemToDisplay;
     public Image itemDisplayImage;
+    int slotIndex;
+
+    public enum InventoryType
+    {
+        Item, Tool
+    }
+    public InventoryType inventoryType;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +40,16 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
 
         itemDisplayImage.gameObject.SetActive(false);
+    }
+
+    public void AssignIndex(int slotIndex)
+    {
+        this.slotIndex = slotIndex;
+    }
+
+    public virtual void OnPointerClick(PointerEventData eventData)
+    {
+        InventoryManager.Instance.InventoryToHand(slotIndex, inventoryType);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
