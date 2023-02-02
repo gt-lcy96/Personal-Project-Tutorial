@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
-    public GameObject inventoryPanel;
 
+    [Header("Status Bar")]
+    public Image toolEquipSlot;
+    
     [Header("Inventory System")]
+    public GameObject inventoryPanel;
     // the ui slot for tools and item
     public InventorySlot[] toolSlots;
     public InventorySlot[] itemSlots;
@@ -33,15 +37,32 @@ public class UIManager : MonoBehaviour
     }
     private void Start() {
         inventoryPanel.SetActive(false);
-        RenderInventory();
     }
 
+    void Update()
+    {
+        RenderInventory();
+    }
+    void RenderEquipTool(ItemData toolData)
+    {
+        if(toolData != null)
+        {
+            toolEquipSlot.sprite = toolData.thumbnail;
+            toolEquipSlot.gameObject.SetActive(true);
+
+            Debug.Log("render equiped tool");
+            return;
+        }
+
+        toolEquipSlot.gameObject.SetActive(false);
+    }
+    
     void RenderInventory()
     {
         RenderInventoryPanel(toolSlots, InventoryManager.Instance.tools);
         RenderInventoryPanel(itemSlots, InventoryManager.Instance.items);
+        RenderEquipTool(InventoryManager.Instance.equippedTool);
     }
-
 
     void RenderInventoryPanel(InventorySlot[] uiSlot, ItemData[] itemData)
     {
@@ -65,7 +86,7 @@ public class UIManager : MonoBehaviour
             itemDescriptionText.text = "";
 
             return;
-        }
+        }   
 
         itemNameText.text = data.name;
         itemDescriptionText.text = data.descripton;
