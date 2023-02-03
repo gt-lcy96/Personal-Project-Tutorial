@@ -15,6 +15,8 @@ public class Land : MonoBehaviour
     public LandStatus landStatus;
     public GameObject selected;
 
+    private Material currentMaterial;
+
 
     void Start()
     {
@@ -30,7 +32,7 @@ public class Land : MonoBehaviour
     {
         landStatus = status;
         Material material = dirtMat;
-        switch(status)
+        switch (status)
         {
             case LandStatus.Dirt:
                 material = dirtMat;
@@ -39,11 +41,15 @@ public class Land : MonoBehaviour
                 material = tilledLandMat;
                 break;
             case LandStatus.watered:
-                material = wateredMat;
+            //renderer.material cant be used to compare directly as it is Instance, so create currentMaterial
+                if(currentMaterial == tilledLandMat)
+                {
+                    material = wateredMat;
+                }
                 break;
         }
 
-        renderer.material = material;
+        renderer.material = currentMaterial = material;
     }
 
     public void Select(bool toggle)
@@ -53,7 +59,23 @@ public class Land : MonoBehaviour
 
     public void Interact()
     {
-        SwitchLandStatus(LandStatus.tilledLand);
-        Debug.Log("Land.Interact");
+        ItemData toolSlot = InventoryManager.Instance.equippedTool;
+
+        EquipmentData equipmentTool = toolSlot as EquipmentData;
+
+        if(equipmentTool != null)
+        {
+            EquipmentData.ToolType toolType = equipmentTool.toolType;
+            switch(toolType)
+            {
+                case EquipmentData.ToolType.Hoe:
+                    SwitchLandStatus(LandStatus.tilledLand);
+                    break;
+                case EquipmentData.ToolType.WateringCan:
+
+                    SwitchLandStatus(LandStatus.watered);
+                    break;
+            }
+        }
     }
 }
