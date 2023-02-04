@@ -9,4 +9,6 @@ public class SeedData : ItemData
 
     //item to yield after the seed grow
     public ItemData cropToYield;
+
+    public GameObject seedling;
 }
