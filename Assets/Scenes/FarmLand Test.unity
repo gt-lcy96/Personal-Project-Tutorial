@@ -3891,7 +3891,7 @@ MonoBehaviour:
     year: 0
     season: 0
     day: 0
-    hour: 0
+    hour: 6
     minute: 0
   timescale: 1
   sunTransform: {fileID: 638692650}
