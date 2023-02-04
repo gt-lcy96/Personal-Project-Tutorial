@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Land : MonoBehaviour
+public class Land : MonoBehaviour, ITimeTracker
 {
     public enum LandStatus
     {
@@ -16,6 +16,9 @@ public class Land : MonoBehaviour
     public GameObject selected;
 
     private Material currentMaterial;
+
+    //Cache the time the land was watered
+    GameTimestamp timeWatered;
 
 
     void Start()
@@ -41,10 +44,15 @@ public class Land : MonoBehaviour
                 material = tilledLandMat;
                 break;
             case LandStatus.watered:
-            //renderer.material cant be used to compare directly as it is Instance, so create currentMaterial
+                //renderer.material cant be used to compare directly as it is Instance, so create currentMaterial
+                // only the tilled land can be watered
                 if(currentMaterial == tilledLandMat)
                 {
                     material = wateredMat;
+
+                    //Cache the time it was watered
+                    timeWatered = TimeManager.Instance.GetGameTimestamp();
+                    
                 }
                 break;
         }
@@ -77,5 +85,10 @@ public class Land : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void ClockUpdate(GameTimestamp timestamp)
+    {
+        // if(landStatus == LandStatus.watered)
     }
 }

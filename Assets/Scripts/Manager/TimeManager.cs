@@ -72,6 +72,12 @@ public class TimeManager : MonoBehaviour
         sunTransform.eulerAngles = new Vector3(sunAngle, 0, 0);
     }
 
+    public GameTimestamp GetGameTimestamp()
+    {
+        // Return a cloned timestamp
+        return new GameTimestamp(timestamp);
+    }
+
     // Handling Listerner
     
     // Add the object to the list of listeners

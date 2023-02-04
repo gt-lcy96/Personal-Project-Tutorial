@@ -39,6 +39,16 @@ public class GameTimestamp
         this.minute = minute;
     }
 
+    // create a new instance of GameTimestamp from existing one
+    public GameTimestamp(GameTimestamp timestamp)
+    {
+        this.year = timestamp.year;
+        this.season = timestamp.season;
+        this.day = timestamp.day;
+        this.hour = timestamp.hour;
+        this.minute = timestamp.minute;
+    }
+
     public void UpdateClock()
     {
         minute++;
@@ -106,5 +116,7 @@ public class GameTimestamp
     {
         return years * 4 * 30;
     }
+
+    
 }
     
