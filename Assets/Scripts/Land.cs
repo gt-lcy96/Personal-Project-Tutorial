@@ -28,6 +28,9 @@ public class Land : MonoBehaviour, ITimeTracker
         //set default material for land status
         SwitchLandStatus(LandStatus.Dirt);
         Select(false);
+
+        // Add this to TimeManager Listener List
+        TimeManager.Instance.RegisterTracker(this);
     }
 
     // Update is called once per frame
@@ -89,6 +92,17 @@ public class Land : MonoBehaviour, ITimeTracker
 
     public void ClockUpdate(GameTimestamp timestamp)
     {
-        // if(landStatus == LandStatus.watered)
+        if(landStatus == LandStatus.watered)
+        {
+            // Hours since the land was watered
+            int hourElapsed = GameTimestamp.CompareTimestamps(timeWatered, timestamp);
+            
+            
+            if(hourElapsed > 24)
+            {
+                //Dry up (Switch Back to tilledLand)
+                SwitchLandStatus(LandStatus.tilledLand);
+            }
+        }
     }
 }

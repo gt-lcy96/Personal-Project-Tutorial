@@ -117,6 +117,20 @@ public class GameTimestamp
         return years * 4 * 30;
     }
 
-    
+    // calculate the total hours for years, seasons, days, hours
+    public static int totalHours(GameTimestamp timestamp)
+    {
+        int yearsInHours = DaysToHours(YearsToDays(timestamp.year));
+        int seasonInHours = DaysToHours(SeasonsToDays(timestamp.season));
+        int daysInHours = DaysToHours(timestamp.day);
+
+        return yearsInHours + seasonInHours + daysInHours + timestamp.hour;
+    }
+
+    public static int CompareTimestamps(GameTimestamp timestamp1, GameTimestamp timestamp2)
+    {
+        int difference = totalHours(timestamp1) - totalHours(timestamp2);
+        return Mathf.Abs(difference);
+    }
 }
     
