@@ -73,7 +73,7 @@ public class GameTimestamp
     public DayOfTheWeek GetDayOfTheWeek()
     {
         // Convert the total time passed into days
-        int daysPassed = YearsToSeason(year) + SeasonsToDays(season) + day;
+        int daysPassed = YearsToDays(year) + SeasonsToDays(season) + day;
 
         //Remainder after dividing daysPassed by 7
         int dayIndex = daysPassed % 7;
@@ -102,7 +102,7 @@ public class GameTimestamp
     }
 
     // Years to Season
-    public static int YearsToSeason(int years)
+    public static int YearsToDays(int years)
     {
         return years * 4 * 30;
     }
