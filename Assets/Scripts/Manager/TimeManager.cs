@@ -7,12 +7,16 @@ public class TimeManager : MonoBehaviour
     // SingleTon
     public static TimeManager Instance { get; private set; }
 
+    [Header("Internal Clock")]
     [SerializeField]
     GameTimestamp timestamp;
     public float timescale = 1;
 
+    [Header("Day and Night cylce")]
     public Transform sunTransform;
 
+    // List of Objects to inform of changes to the time
+    List<ITimeTracker> listeners = new List<ITimeTracker>();
     private void Awake()
     {
         // Singleton design
@@ -36,8 +40,8 @@ public class TimeManager : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(1/timescale);;
             Tick();
+            yield return new WaitForSeconds(1/timescale);;
         }
 
     }
@@ -45,8 +49,18 @@ public class TimeManager : MonoBehaviour
     // A tick of the in-game time
     public void Tick()
     {
+        
         timestamp.UpdateClock();
+        foreach (ITimeTracker listener in listeners)
+        {
+            listener.ClockUpdate(timestamp);
+        }
 
+        UpdateSumMovement();
+    }
+
+    void UpdateSumMovement()
+    {
         // Convert current time to minute
         int timeToMinutes = GameTimestamp.HoursToMinutes(timestamp.hour) + timestamp.minute;
 
@@ -57,4 +71,19 @@ public class TimeManager : MonoBehaviour
 
         sunTransform.eulerAngles = new Vector3(sunAngle, 0, 0);
     }
+
+    // Handling Listerner
+    
+    // Add the object to the list of listeners
+    public void RegisterTracker(ITimeTracker listener)
+    {
+        listeners.Add(listener);
+    }
+
+    public void UnregisterTracker(ITimeTracker listener)
+    {
+        listeners.Remove(listener);
+    }
+
+
 }

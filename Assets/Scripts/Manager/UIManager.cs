@@ -4,12 +4,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, ITimeTracker
 {
     public static UIManager Instance { get; private set; }
 
     [Header("Status Bar")]
     public Image toolEquipSlot;
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI dateText;
     
     [Header("Inventory System")]
     public GameObject inventoryPanel;
@@ -45,6 +47,9 @@ public class UIManager : MonoBehaviour
     private void Start() {
         inventoryPanel.SetActive(false);
         AsignSlotIndexes();
+
+        // Add UIMAnAger to the list of objects timeMnaager will notify
+        TimeManager.Instance.RegisterTracker(this);
     }
 
     public void AsignSlotIndexes()
@@ -112,5 +117,31 @@ public class UIManager : MonoBehaviour
         itemNameText.text = data.name;
         itemDescriptionText.text = data.descripton;
     }
-    
+
+    public void ClockUpdate(GameTimestamp timestamp)
+    {
+        // Handle the time
+        int hours = timestamp.hour;
+        string minutes =  timestamp.minute.ToString("00");
+
+        //AM or PM
+        string prefix = "AM";
+
+        if(hours > 12)
+        {
+            // Time become PM
+            prefix = "PM";
+            hours -= 12;
+        }
+
+        timeText.text = $"{prefix} {hours}:{minutes}";
+
+        // Handle the date
+        int day = timestamp.day;
+        string season = timestamp.season.ToString();
+        string dayOfTheWeek = timestamp.GetDayOfTheWeek().ToString();
+
+        // Format it for the date text display
+        dateText.text = $"{season} {day} ({dayOfTheWeek})";
+    }
 }
