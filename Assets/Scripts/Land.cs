@@ -49,7 +49,7 @@ public class Land : MonoBehaviour, ITimeTracker
             case LandStatus.watered:
                 //renderer.material cant be used to compare directly as it is Instance, so create currentMaterial
                 // only the tilled land can be watered
-                if(currentMaterial == tilledLandMat)
+                if(currentMaterial == tilledLandMat || currentMaterial == wateredMat)
                 {
                     material = wateredMat;
 
