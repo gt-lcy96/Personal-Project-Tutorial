@@ -40,8 +40,17 @@ public class PlayerController : MonoBehaviour
         HandleAttack();
         HandleSpawnObstacle();
         HandleInteract();
+        SpeedUpTime();
+        
     }
 
+    void SpeedUpTime()
+    {
+        if(Input.GetKey(KeyCode.T))
+        {
+            TimeManager.Instance.Tick();
+        }
+    }
     void HandleInteract()
     {
         if(Input.GetKeyDown(KeyCode.E))
