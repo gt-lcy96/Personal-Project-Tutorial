@@ -24,7 +24,7 @@ public class PlayerInteraction : MonoBehaviour
         if(Physics.Raycast(ray, out hit, raycastDistance)) 
         {
             OnInteractableHit(hit);
-            Debug.Log("Hit object" + hit.collider.name);
+            // Debug.Log("Hit object" + hit.collider.name);
         }
     }
 
@@ -34,7 +34,7 @@ public class PlayerInteraction : MonoBehaviour
         Collider other = hit.collider;
         if(other.gameObject.CompareTag("Soil"))
         {
-            Debug.Log("selected");
+            // Debug.Log("selected");
             HandleLandSelection(other.GetComponent<Land>());
             return;
         }

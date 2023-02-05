@@ -72,7 +72,6 @@ public class UIManager : MonoBehaviour, ITimeTracker
             toolEquipSlot.sprite = toolData.thumbnail;
             toolEquipSlot.gameObject.SetActive(true);
 
-            Debug.Log("render equiped tool");
             return;
         }
 
