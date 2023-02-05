@@ -76,6 +76,12 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
+        //The player shouldn't be able to use his tool when he has his hands full with an item
+        if(InventoryManager.Instance.equippedItem != null)
+        {
+            return;
+        }
+
         if(selectedLand != null)
         {
             selectedLand.Interact();
