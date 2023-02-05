@@ -131,7 +131,12 @@ public class Land : MonoBehaviour, ITimeTracker
             // Hours since the land was watered
             int hourElapsed = GameTimestamp.CompareTimestamps(timeWatered, timestamp);
             
-            
+            // Grow the planted crop, if any
+            if(cropPlanted != null)
+            {
+                cropPlanted.Grow();
+            }
+
             if(hourElapsed > 24)
             {
                 //Dry up (Switch Back to tilledLand)
