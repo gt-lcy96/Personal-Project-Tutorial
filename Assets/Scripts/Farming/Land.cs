@@ -130,6 +130,11 @@ public class Land : MonoBehaviour, ITimeTracker
         {
             // Hours since the land was watered
             int hourElapsed = GameTimestamp.CompareTimestamps(timeWatered, timestamp);
+            Debug.Log("gameObject.name: " + gameObject.name);
+            Debug.Log("hourElapsed: " + hourElapsed);
+            Debug.Log("timeWatered: " + timeWatered.hour);
+            Debug.Log("timestamp: " + timestamp.hour);
+            Debug.Log("------------");
             
             // Grow the planted crop, if any
             if(cropPlanted != null)

@@ -396,6 +396,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94373556}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &123677946 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5782674153060096774, guid: ef143f9aaf736cd4493fea14de8da826, type: 3}
+  m_PrefabInstance: {fileID: 501097768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &183537406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3960,6 +3965,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   equippedItem: {fileID: 0}
+  handPoint: {fileID: 1963329704}
 --- !u!4 &1489272844
 Transform:
   m_ObjectHideFlags: 0
@@ -4830,6 +4836,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff9e3c3224180a40a7e53f735dc8433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1963329703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963329704}
+  m_Layer: 0
+  m_Name: HandPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1963329704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963329703}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 123677946}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1981324847
 GameObject:
   m_ObjectHideFlags: 0

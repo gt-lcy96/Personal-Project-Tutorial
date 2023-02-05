@@ -1,10 +1,22 @@
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    // SingleTon
     public static InventoryManager Instance { get; private set; }
+
+    [Header("Tools")]
+    public ItemData[] tools = new ItemData[8];
+    public ItemData equippedTool = null;
+
+    [Header("Items")]
+    public ItemData[] items = new ItemData[8];
+    public ItemData equippedItem = null;
+
+    public Transform handPoint;
 
     private void Awake()
     {
@@ -20,15 +32,22 @@ public class InventoryManager : MonoBehaviour
 
     }
 
-    [Header("Tools")]
-    public ItemData[] tools = new ItemData[8];
-    public ItemData equippedTool = null;
 
-    [Header("Items")]
-    public ItemData[] items = new ItemData[8];
-    public ItemData equippedItem = null;
-
-    
+    public void RenderItemOnHand()
+    {   
+        // Reset object on the hand
+        if(handPoint.childCount > 0)
+        {
+            Destroy(handPoint.GetChild(0).gameObject);
+        }
+        
+        // Check if player has anything to equipped
+        if(equippedItem != null)
+        {
+            // Instantiate the item on the player's hand position and put it on the scene.
+            Instantiate(equippedItem.gameModel, handPoint);
+        }
+    }
     public void InventoryToHand(int slotIndex, InventorySlot.InventoryType type)
     {
         if(type == InventorySlot.InventoryType.Item)
@@ -41,6 +60,9 @@ public class InventoryManager : MonoBehaviour
 
             // Change the Hand's Slot to Inventory
             equippedItem = itemToEquip;
+
+            //Update the item on hand changes in scene
+            RenderItemOnHand();
         } else 
         {
             ItemData toolToEquip = tools[slotIndex];
@@ -69,6 +91,8 @@ public class InventoryManager : MonoBehaviour
                 }
             }
 
+            // Update item changes in scene
+            RenderItemOnHand();
             
             
         } else {
