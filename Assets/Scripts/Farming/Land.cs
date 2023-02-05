@@ -20,6 +20,11 @@ public class Land : MonoBehaviour, ITimeTracker
     //Cache the time the land was watered
     GameTimestamp timeWatered;
 
+    [Header("Crops")]
+    public GameObject cropPrefab;
+
+    //crop currently not plant on ground
+    CropBehaviour cropPlanted = null;
 
     void Start()
     {
@@ -72,6 +77,12 @@ public class Land : MonoBehaviour, ITimeTracker
     {
         ItemData toolSlot = InventoryManager.Instance.equippedTool;
 
+        //if nothing equip, return early
+        if(toolSlot == null)
+        {
+            return;
+        }
+
         EquipmentData equipmentTool = toolSlot as EquipmentData;
 
         if(equipmentTool != null)
@@ -87,6 +98,30 @@ public class Land : MonoBehaviour, ITimeTracker
                     SwitchLandStatus(LandStatus.watered);
                     break;
             }
+
+            // We don't need to check for seeds if we have already confirmed the tool to be an equipment
+            return;
+        }
+
+        InteractSeedTool(toolSlot);
+    }
+
+    public void InteractSeedTool(ItemData toolSlot)
+    {
+        //Try casting the itemdata in the toolslot as SeedData
+        SeedData seedTool = toolSlot as SeedData;
+        
+        //Conditions for the player to be able to plant a seed
+        //1. He is holding a tool of type SeedData
+        //2. The Land State must be either watered or tilled
+        //3. There isn't already a crop that has been planted
+        if(seedTool != null && landStatus != LandStatus.Dirt && cropPlanted == null)
+        {
+            GameObject cropObject = Instantiate(cropPrefab, transform);
+            cropObject.transform.localPosition = new Vector3(0, 0.55f, 0);
+
+            cropPlanted = cropObject.GetComponent<CropBehaviour>();
+            cropPlanted.Plant(seedTool);
         }
     }
 

@@ -116,6 +116,7 @@ MonoBehaviour:
   wateredMat: {fileID: 2100000, guid: bf37dc27a147647489fa935bd855362a, type: 2}
   landStatus: 0
   selected: {fileID: 4174064720517544662}
+  cropPrefab: {fileID: 6075525145344483241, guid: 6dac4c558c0bd404cb6656d728885f32, type: 3}
 --- !u!1 &4174064720517544662
 GameObject:
   m_ObjectHideFlags: 0

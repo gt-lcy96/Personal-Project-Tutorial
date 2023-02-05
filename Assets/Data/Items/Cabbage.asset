@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descripton: a leafy rounded vegetable
   thumbnail: {fileID: 2058439976, guid: 7129b454f2885314ba642c698e4a15d5, type: 3}
-  gameModel: {fileID: 0}
+  gameModel: {fileID: 5771600864599094385, guid: 93e8701494524724192de5ec483594f2, type: 3}
