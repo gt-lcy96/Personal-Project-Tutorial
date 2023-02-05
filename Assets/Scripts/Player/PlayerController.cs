@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         LookAtCursor();
         MovePlayer();
-        HandleAttack();
+        // HandleAttack();
         HandleSpawnObstacle();
         HandleInteract();
         SpeedUpTime();
@@ -52,10 +52,17 @@ public class PlayerController : MonoBehaviour
         }
     }
     void HandleInteract()
-    {
-        if(Input.GetKeyDown(KeyCode.E))
+    {   
+        // Tool Interact
+        if(Input.GetMouseButtonDown(0))
         {
             playerInteract.Interact();
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            
+            playerInteract.ItemInteract();
         }
     }
 
@@ -82,25 +89,27 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    void HandleAttack()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetBool("Shoot_b", true);  // set shooting animation
-            Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
+    // void HandleAttack()
+    // {
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //         animator.SetBool("Shoot_b", true);  // set shooting animation
+    //         Vector3 spawnPos = new Vector3(transform.position.x, 0.8f, transform.position.z + 0.5f);
             
-            Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-            cameraShake.TriggerShake(.05f, .1f);
+    //         Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+    //         cameraShake.TriggerShake(.05f, .1f);
 
-        } 
-        // else {
+    //     } 
+    //     // else {
+
+
             
-        //     //Idle Attack Animation Setting
-        //     animator.SetInteger("WeaponType_int", 1);
-        //     animator.SetBool("Shoot_b", false);
-        //     animator.SetBool("Reload_b", false);
-        // }
-    }
+    //     //     //Idle Attack Animation Setting
+    //     //     animator.SetInteger("WeaponType_int", 1);
+    //     //     animator.SetBool("Shoot_b", false);
+    //     //     animator.SetBool("Reload_b", false);
+    //     // }
+    // }
 
     void MovePlayer() 
     {
