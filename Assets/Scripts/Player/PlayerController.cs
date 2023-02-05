@@ -93,12 +93,13 @@ public class PlayerController : MonoBehaviour
             cameraShake.TriggerShake(.05f, .1f);
 
         } 
-        else {
-            //Idle Attack Animation Setting
-            animator.SetInteger("WeaponType_int", 1);
-            animator.SetBool("Shoot_b", false);
-            animator.SetBool("Reload_b", false);
-        }
+        // else {
+            
+        //     //Idle Attack Animation Setting
+        //     animator.SetInteger("WeaponType_int", 1);
+        //     animator.SetBool("Shoot_b", false);
+        //     animator.SetBool("Reload_b", false);
+        // }
     }
 
     void MovePlayer() 
