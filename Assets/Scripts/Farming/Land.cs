@@ -83,6 +83,11 @@ public class Land : MonoBehaviour, ITimeTracker
             return;
         }
 
+        TryInteractEquipmentTool(toolSlot);
+        TryInteractSeedTool(toolSlot);
+    }
+    private void TryInteractEquipmentTool(ItemData toolSlot)
+    {
         EquipmentData equipmentTool = toolSlot as EquipmentData;
 
         if(equipmentTool != null)
@@ -98,15 +103,9 @@ public class Land : MonoBehaviour, ITimeTracker
                     SwitchLandStatus(LandStatus.watered);
                     break;
             }
-
-            // We don't need to check for seeds if we have already confirmed the tool to be an equipment
-            return;
         }
-
-        InteractSeedTool(toolSlot);
     }
-
-    public void InteractSeedTool(ItemData toolSlot)
+    private void TryInteractSeedTool(ItemData toolSlot)
     {
         //Try casting the itemdata in the toolslot as SeedData
         SeedData seedTool = toolSlot as SeedData;
