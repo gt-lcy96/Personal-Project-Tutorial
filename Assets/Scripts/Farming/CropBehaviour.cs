@@ -8,15 +8,20 @@ public class CropBehaviour : MonoBehaviour
 
     [Header("Stages of Plant Life")]
     public GameObject seed;
+    public GameObject wilted;
     private GameObject seedling;
     private GameObject harvestable;
 
     //The grow points of the crop
     int growth;
     int maxGrowth;
+
+    // The Crop can stay alive for 48 hours wihtout water before it dies
+    int maxHealth = GameTimestamp.HoursToMinutes(40);
+    int health;
     public enum CropState
     {
-        Seed, Seedling, Harvestable
+        Seed, Seedling, Harvestable, Wilted
     }
     public CropState cropState;
 
@@ -51,6 +56,12 @@ public class CropBehaviour : MonoBehaviour
     {
         growth++;
 
+        // Restore the health of the plant when it is watered
+        if(health < maxHealth)
+        {
+            health ++;
+        }
+
         //The seed will sprout into a seedling when the growth is at 50%
         if(growth >= maxGrowth /2 && cropState == CropState.Seed)
         {
@@ -63,11 +74,23 @@ public class CropBehaviour : MonoBehaviour
         }
     }
 
+    //The crop will progressively wither when the soil is dry
+    public void Wither()
+    {
+        health--;
+
+        if(health <= 0 && cropState != CropState.Seed)
+        {
+            SwitchState(CropState.Wilted);
+        }
+    }
+
     private void SwitchState(CropState stateToSwitch)
     {
         seed.SetActive(false);
         seedling.SetActive(false);
         harvestable.SetActive(false);
+        wilted.SetActive(false);
 
         switch(stateToSwitch)
         {
@@ -76,6 +99,7 @@ public class CropBehaviour : MonoBehaviour
                 break;
             case CropState.Seedling:
                 seedling.SetActive(true);
+                health = maxHealth;
                 break;
             case CropState.Harvestable:
                 harvestable.SetActive(true);
@@ -88,6 +112,9 @@ public class CropBehaviour : MonoBehaviour
                     Destroy(gameObject);
                 }
                     break;
+            case CropState.Wilted:
+                wilted.SetActive(true);
+                break;
         }
 
         cropState = stateToSwitch;

@@ -143,5 +143,15 @@ public class Land : MonoBehaviour, ITimeTracker
                 SwitchLandStatus(LandStatus.tilledLand);
             }
         }
+
+        // Handle the wilting of the plant
+        if(landStatus == LandStatus.tilledLand && cropPlanted != null)
+        {
+            // If the crop has already germinated, start the withering
+            if(cropPlanted.cropState != CropBehaviour.CropState.Seed)
+            {
+                cropPlanted.Wither();
+            }
+        }
     }
 }
