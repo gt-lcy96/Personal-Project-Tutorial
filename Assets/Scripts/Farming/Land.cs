@@ -102,6 +102,13 @@ public class Land : MonoBehaviour, ITimeTracker
 
                     SwitchLandStatus(LandStatus.watered);
                     break;
+                case EquipmentData.ToolType.Shovel:
+                    if(cropPlanted != null)
+                    {
+                        //remove the crop from the land
+                        Destroy(cropPlanted.gameObject);
+                    }
+                    break;
             }
         }
     }
