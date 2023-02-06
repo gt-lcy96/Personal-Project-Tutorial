@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc4c1c8cbfe6544478d274cbcbafdd08, type: 3}
-  m_Name: Cabbage seed
+  m_Name: Tomato Seed
   m_EditorClassIdentifier: 
-  descripton: seed to grow cabbage
+  descripton: Seeds to grow tomato
   thumbnail: {fileID: -619187199, guid: 098c7187aaf8c8341bae68c7b93c1c07, type: 3}
-  gameModel: {fileID: 1000010903160450, guid: 8dfbe94bc89610d489620aca436a33ae, type: 3}
-  daysToGrow: 3
-  cropToYield: {fileID: 11400000, guid: 43225bdcfac8f3a4291ff802c6c05ff6, type: 2}
-  seedling: {fileID: 8504933464147525221, guid: ce503104fa4cb954f894faea06b4e088, type: 3}
-  regrowable: 0
-  daysToRegrow: 0
+  gameModel: {fileID: 0}
+  daysToGrow: 1
+  cropToYield: {fileID: 11400000, guid: 8b1512496d5d96843a7090568e4a2a61, type: 2}
+  seedling: {fileID: 8940897812262015729, guid: 2585b603de316ab48a11a288706e4776, type: 3}
+  regrowable: 1
+  daysToRegrow: 1
