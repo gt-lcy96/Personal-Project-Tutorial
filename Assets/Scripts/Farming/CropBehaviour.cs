@@ -37,6 +37,12 @@ public class CropBehaviour : MonoBehaviour
         int hoursToGrow = GameTimestamp.DaysToHours(seedToGrow.daysToGrow);
         maxGrowth = GameTimestamp.HoursToMinutes(hoursToGrow);
 
+        if(seedToGrow.regrowable)
+        {
+            RegrowableHarvestBehaviour regrowableHarvest = harvestable.GetComponent<RegrowableHarvestBehaviour>();
+            regrowableHarvest.SetParent(this);
+        }
+
         //Set the initial state to Seed
         SwitchState(CropState.Seed);
     }
@@ -74,13 +80,28 @@ public class CropBehaviour : MonoBehaviour
             case CropState.Harvestable:
                 harvestable.SetActive(true);
 
-                // unparent it before destroy the gameObject
-                harvestable.transform.parent = null;
-                Destroy(gameObject);
-                break;
+                // If the seed is not regrowable, detach the harvestable from this corp gameobject and destroy it
+                if(!seedToGrow.regrowable)
+                {
+                    // unparent it before destroy the gameObject
+                    harvestable.transform.parent = null;
+                    Destroy(gameObject);
+                }
+                    break;
         }
 
         cropState = stateToSwitch;
 
+    }
+
+    //Called when the player harvest a regrowable crop. Resets the state to seedling
+    public void Regrow()
+    {
+        //Reset growth
+        //Get the regrowth time in hours
+        int hoursToReGrow = GameTimestamp.DaysToHours(seedToGrow.daysToRegrow);
+        growth = maxGrowth - GameTimestamp.HoursToMinutes(hoursToReGrow);
+
+        SwitchState(CropState.Seedling);
     }
 }

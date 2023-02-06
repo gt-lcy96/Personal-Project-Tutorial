@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descripton: a red color eadible plant
   thumbnail: {fileID: 1092769145, guid: 7129b454f2885314ba642c698e4a15d5, type: 3}
-  gameModel: {fileID: 0}
+  gameModel: {fileID: 2315622543815235671, guid: fd32691d0ec4d9c4f9d1a644e82d8bea, type: 3}
