@@ -15,7 +15,7 @@ public class RegrowableHarvestBehaviour : InteractableObject
     public override void Pickup()
     {
         //Update Item on Player's hand 
-        InventoryManager.Instance.equippedItem = item;
+        InventoryManager.Instance.EquipEmptySlot(item);
         InventoryManager.Instance.RenderItemOnHand();
 
         parentCrop.Regrow();

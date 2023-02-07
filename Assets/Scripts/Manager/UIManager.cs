@@ -80,16 +80,19 @@ public class UIManager : MonoBehaviour, ITimeTracker
     
     void RenderInventory()
     {
-        RenderInventoryPanel(toolSlots, InventoryManager.Instance.tools);
-        RenderInventoryPanel(itemSlots, InventoryManager.Instance.items);
-        RenderEquipTool(InventoryManager.Instance.equippedTool);
+        ItemSlotData[] inventoryToolSlots = InventoryManager.Instance.GetInventorySlots(InventorySlot.InventoryType.Tool);
+        ItemSlotData[] inventoryItemSlots = InventoryManager.Instance.GetInventorySlots(InventorySlot.InventoryType.Item);
+
+        RenderInventoryPanel(toolSlots, inventoryToolSlots);
+        RenderInventoryPanel(itemSlots, inventoryItemSlots);
+        RenderEquipTool(InventoryManager.Instance.GetEquippedSlotItem(InventorySlot.InventoryType.Tool));
         
         // Render the equipped slots in Inventory Panel
-        toolHandSlot.Display(InventoryManager.Instance.equippedTool);
-        itemHandSlot.Display(InventoryManager.Instance.equippedItem);
+        toolHandSlot.Display(InventoryManager.Instance.GetEquippedSlot(InventorySlot.InventoryType.Tool));
+        itemHandSlot.Display(InventoryManager.Instance.GetEquippedSlot(InventorySlot.InventoryType.Item));
     }
 
-    void RenderInventoryPanel(InventorySlot[] uiSlot, ItemData[] itemData)
+    void RenderInventoryPanel(InventorySlot[] uiSlot, ItemSlotData[] itemData)
     {
         for (int i = 0; i < uiSlot.Length; i++)
         {
@@ -101,6 +104,7 @@ public class UIManager : MonoBehaviour, ITimeTracker
     public void ToggleInventoryPanel()
     {
         inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+        RenderInventory();
     }
 
     public void DisplayItemInfo(ItemData data)

@@ -3953,26 +3953,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a959e02404f88f46b76f80c3050231e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tools:
-  - {fileID: 11400000, guid: 511b884df03b4c049b534ec89c54f312, type: 2}
-  - {fileID: 11400000, guid: 71564ff60c16512429f06a9aed46a797, type: 2}
-  - {fileID: 11400000, guid: 42a55c7d64d762c478112d2468516e54, type: 2}
-  - {fileID: 11400000, guid: 70e14fd1325d01546b55adcb8d417c01, type: 2}
-  - {fileID: 11400000, guid: 6eb05518c2f9a554dbb602a7ae340cec, type: 2}
-  - {fileID: 11400000, guid: 7f92ad488c92fdc4081c57e23889ad09, type: 2}
-  - {fileID: 11400000, guid: d3a252eaa18c63442bcedc9cc3dc8eab, type: 2}
-  - {fileID: 0}
-  equippedTool: {fileID: 0}
-  items:
-  - {fileID: 11400000, guid: 43225bdcfac8f3a4291ff802c6c05ff6, type: 2}
-  - {fileID: 11400000, guid: 48b48e53f97fa5f4c8220d9861d369f1, type: 2}
-  - {fileID: 11400000, guid: dfbbbd3edd37307498ab90e4947bb29b, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  equippedItem: {fileID: 0}
+  toolSlots:
+  - itemData: {fileID: 11400000, guid: 511b884df03b4c049b534ec89c54f312, type: 2}
+    quantity: 1
+  - itemData: {fileID: 11400000, guid: 71564ff60c16512429f06a9aed46a797, type: 2}
+    quantity: 1
+  - itemData: {fileID: 11400000, guid: 70e14fd1325d01546b55adcb8d417c01, type: 2}
+    quantity: 1
+  - itemData: {fileID: 11400000, guid: 6eb05518c2f9a554dbb602a7ae340cec, type: 2}
+    quantity: 1
+  - itemData: {fileID: 11400000, guid: 7f92ad488c92fdc4081c57e23889ad09, type: 2}
+    quantity: 1
+  - itemData: {fileID: 11400000, guid: d3a252eaa18c63442bcedc9cc3dc8eab, type: 2}
+    quantity: 1
+  - itemData: {fileID: 0}
+    quantity: 0
+  - itemData: {fileID: 0}
+    quantity: 0
+  equippedToolSlot:
+    itemData: {fileID: 0}
+    quantity: 0
+  itemSlots:
+  - itemData: {fileID: 0}
+    quantity: 0
+  - itemData: {fileID: 0}
+    quantity: 0
+  - itemData: {fileID: 0}
+    quantity: 0
+  - itemData: {fileID: 0}
+    quantity: 0
+  - itemData: {fileID: 0}
+    quantity: 0
+  - itemData: {fileID: 0}
+    quantity: 0
+  - itemData: {fileID: 0}
+    quantity: 0
+  - itemData: {fileID: 0}
+    quantity: 0
+  equippedItemSlot:
+    itemData: {fileID: 0}
+    quantity: 0
   handPoint: {fileID: 1963329704}
 --- !u!4 &1489272844
 Transform:
