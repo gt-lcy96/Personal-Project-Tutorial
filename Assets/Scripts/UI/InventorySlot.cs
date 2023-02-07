@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     ItemData itemToDisplay;
+    public TextMeshProUGUI quantityText;
     int quantity;
     public Image itemDisplayImage;
     int slotIndex;
@@ -33,9 +35,18 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         itemToDisplay = itemSlot.itemData;
         quantity = itemSlot.quantity;
 
+        // By default, the quantity text should not show anything
+        quantityText.text = "";
+
         if(itemToDisplay != null)
         {
             itemDisplayImage.sprite = itemToDisplay.thumbnail;
+
+            // Display the stack the item is more than 1
+            if(quantity > 1)
+            {
+                quantityText.text = quantity.ToString();
+            }
             
 
             itemDisplayImage.gameObject.SetActive(true);
