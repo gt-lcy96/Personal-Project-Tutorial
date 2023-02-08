@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour, ITimeTracker
         toolEquipSlot.gameObject.SetActive(false);
     }
     
-    void RenderInventory()
+    public void RenderInventory()
     {
         ItemSlotData[] inventoryToolSlots = InventoryManager.Instance.GetInventorySlots(InventorySlot.InventoryType.Tool);
         ItemSlotData[] inventoryItemSlots = InventoryManager.Instance.GetInventorySlots(InventorySlot.InventoryType.Item);

@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,7 +45,7 @@ public class InventoryManager : MonoBehaviour
         }
         
         // Check if player has anything to equipped
-        if(equippedItemSlot != null)
+        if(SlotEquipped(InventorySlot.InventoryType.Item))
         {
             // Instantiate the item on the player's hand position and put it on the scene.
             Instantiate(GetEquippedSlotItem(InventorySlot.InventoryType.Item).gameModel, handPoint);
@@ -88,9 +87,9 @@ public class InventoryManager : MonoBehaviour
     {
         if(inventoryType == InventorySlot.InventoryType.Item)
         {
-            return equippedItemSlot != null;
+            return !equippedItemSlot.IsEmpty();
         }
-        return equippedToolSlot != null;
+        return !equippedToolSlot.IsEmpty();
     }
 
     public bool IsTool(ItemData item)
@@ -110,8 +109,8 @@ public class InventoryManager : MonoBehaviour
 
     #endregion
 
-    //Only for equipping empty slots
-    public void EquipEmptySlot(ItemData item)
+    //Equip the hand slot with an ItemData (Will overwrite the slot)
+    public void EquipHandSlot(ItemData item)
     {
         if (IsTool(item))
         {
@@ -122,6 +121,19 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    //Equip the hand slot with an ItemData (Will overwrite the slot)
+    public void EquipHandSlot(ItemSlotData itemSlot)
+    {
+        if (IsTool(itemSlot.itemData))
+        {
+            equippedToolSlot = new ItemSlotData(itemSlot);
+        } else
+        {
+            equippedItemSlot = new ItemSlotData(itemSlot);
+        }
+    }
+
+#region Inventory Slot Validation
     private void OnValidate()
     {
         ValidateInventorySlot(equippedToolSlot);
@@ -148,69 +160,109 @@ public class InventoryManager : MonoBehaviour
             ValidateInventorySlot(slot);
         }
     }
+#endregion
 
-
-
-    public void InventoryToHand(int slotIndex, InventorySlot.InventoryType type)
+    
+    public void InventoryToHand(int slotIndex, InventorySlot.InventoryType inventoryType)
     {
-        if(type == InventorySlot.InventoryType.Item)
+        //The slot to equip (Tool by default)
+        ItemSlotData handToEquip = equippedToolSlot;
+        ItemSlotData[] inventoryToAlter = toolSlots;
+
+        if(inventoryType == InventorySlot.InventoryType.Item)
         {
-            // Cache the Inventory slot ItemData from InventoryManager
-            ItemSlotData itemToEquip = itemSlots[slotIndex];
-
-            // Change the Inventory Slot to the Hand's
-            itemSlots[slotIndex] = equippedItemSlot;
-
-            // Change the Hand's Slot to Inventory
-            equippedItemSlot = itemToEquip;
-
-            //Update the item on hand changes in scene
-            RenderItemOnHand();
-        } else 
-        {
-            ItemSlotData toolToEquip = toolSlots[slotIndex];
-
-            // Change the Inventory Slot to the Hand's
-            toolSlots[slotIndex] = equippedToolSlot;
-
-            // Change the Hand's Slot to Inventory
-            equippedToolSlot = toolToEquip;
+            // Change the slot to item
+            handToEquip = equippedItemSlot;
+            inventoryToAlter = itemSlots;
         }
+
+        //Check if stackable
+        if(handToEquip.Stackable(inventoryToAlter[slotIndex]))
+        {
+            ItemSlotData slotToAlter = inventoryToAlter[slotIndex];
+
+            //Add to hand slot
+            handToEquip.AddQuantity(slotToAlter.quantity);
+
+            slotToAlter.Empty();
+
+        } else
+        {
+            //Not stackable
+            //Cache the Inventory itemSlotData
+            ItemSlotData slotToEquip = new ItemSlotData(inventoryToAlter[slotIndex]);
+
+            //Change the inventory slot to the hands
+            inventoryToAlter[slotIndex] = new ItemSlotData(handToEquip);
+            
+            //Change the hand's slot to the Inventory Slot's
+            EquipHandSlot(slotToEquip);
+
+           
+        }
+
+        if(inventoryType == InventorySlot.InventoryType.Item)
+        {
+
+            //Update the changes in scene
+            RenderItemOnHand();
+        }
+        //Update the changes to UI
+        UIManager.Instance.RenderInventory();
+
     }
 
-    public void HandToInventory(InventorySlot.InventoryType type)
+    public void HandToInventory(InventorySlot.InventoryType inventoryType)
     {
-        if(type == InventorySlot.InventoryType.Item)
+        ItemSlotData handSlot = equippedToolSlot;
+        ItemSlotData[] inventoryToAlter = toolSlots;
+
+        if(inventoryType == InventorySlot.InventoryType.Item)
+        {
+            handSlot = equippedItemSlot;
+            inventoryToAlter = itemSlots;
+        }
+
+        //Try stackig the hand slot.
+        //Check if the operation failed
+        if (!StackItemToInventory(handSlot, inventoryToAlter))
         {
             // Iterate through each inventory slot and find an empty slot to filled in
-            for (int i = 0; i < itemSlots.Length; i++)
+            for (int i = 0; i < inventoryToAlter.Length; i++)
             {
-                if(itemSlots[i] == null)
+                if(inventoryToAlter[i].IsEmpty())
                 {
                     //Send the equipped item over to its new slot
-                    itemSlots[i] = equippedItemSlot;
-                    equippedItemSlot = null;
+                    inventoryToAlter[i] = new ItemSlotData(handSlot);
+                    handSlot.Empty();
                     break;
                 }
             }
-
+        }
+        if(inventoryType == InventorySlot.InventoryType.Item)
+        {
             // Update item changes in scene
             RenderItemOnHand();
+        }   
             
-            
-        } else {
-             // Iterate through each inventory slot and find an empty slot to filled in
-            for (int i = 0; i < toolSlots.Length; i++)
+        UIManager.Instance.RenderInventory();
+    }
+
+    //Iterate through each of the items in the inventory to see if it can be stacked
+    // Will perform the operation if found, returns false if unsuccessful
+    public bool StackItemToInventory(ItemSlotData itemSlot, ItemSlotData[] inventoryArray)
+    {   
+        for (int i = 0; i < inventoryArray.Length; i++)
+        {
+            if(inventoryArray[i].Stackable(itemSlot))
             {
-                if(toolSlots[i] == null)
-                {
-                    //Send the equipped item over to its new slot
-                    toolSlots[i] = equippedToolSlot;
-                    equippedToolSlot = null;
-                    break;
-                }
+                //Add to inventory slot's stack
+                inventoryArray[i].AddQuantity(itemSlot.quantity);
+                itemSlot.Empty();
+                return true;
             }
-            
         }
+
+        return false;
     }
 }

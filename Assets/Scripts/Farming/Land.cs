@@ -78,7 +78,7 @@ public class Land : MonoBehaviour, ITimeTracker
         ItemData toolSlot = InventoryManager.Instance.GetEquippedSlotItem(InventorySlot.InventoryType.Tool);
 
         //if nothing equip, return early
-        if(toolSlot == null)
+        if(!InventoryManager.Instance.SlotEquipped(InventorySlot.InventoryType.Tool))
         {
             return;
         }
