@@ -128,6 +128,10 @@ public class Land : MonoBehaviour, ITimeTracker
 
             cropPlanted = cropObject.GetComponent<CropBehaviour>();
             cropPlanted.Plant(seedTool);
+
+            
+            InventoryManager.Instance.ConsumeItem(InventoryManager.Instance.GetEquippedSlot(InventorySlot.InventoryType.Tool));
+            
         }
     }
 
@@ -161,4 +165,6 @@ public class Land : MonoBehaviour, ITimeTracker
             }
         }
     }
+
+
 }

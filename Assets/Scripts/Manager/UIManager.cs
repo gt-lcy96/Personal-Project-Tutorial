@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour, ITimeTracker
     public Image toolEquipSlot;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI dateText;
+    public TextMeshProUGUI toolQuantityText;
     
     [Header("Inventory System")]
     public GameObject inventoryPanel;
@@ -67,13 +68,23 @@ public class UIManager : MonoBehaviour, ITimeTracker
     }
     void RenderEquipTool(ItemData toolData)
     {
+        // Text should be empty by default
+        toolQuantityText.text = "";
+
         if(toolData != null)
         {
             toolEquipSlot.sprite = toolData.thumbnail;
             toolEquipSlot.gameObject.SetActive(true);
 
+            int quantity = InventoryManager.Instance.GetEquippedSlot(InventorySlot.InventoryType.Tool).quantity;
+            if(quantity > 1)
+            {
+                toolQuantityText.text = quantity.ToString();
+            }
+
             return;
         }
+        
 
         toolEquipSlot.gameObject.SetActive(false);
     }
@@ -85,11 +96,14 @@ public class UIManager : MonoBehaviour, ITimeTracker
 
         RenderInventoryPanel(toolSlots, inventoryToolSlots);
         RenderInventoryPanel(itemSlots, inventoryItemSlots);
-        RenderEquipTool(InventoryManager.Instance.GetEquippedSlotItem(InventorySlot.InventoryType.Tool));
+        
         
         // Render the equipped slots in Inventory Panel
         toolHandSlot.Display(InventoryManager.Instance.GetEquippedSlot(InventorySlot.InventoryType.Tool));
         itemHandSlot.Display(InventoryManager.Instance.GetEquippedSlot(InventorySlot.InventoryType.Item));
+
+        RenderEquipTool(InventoryManager.Instance.GetEquippedSlotItem(InventorySlot.InventoryType.Tool));
+        
     }
 
     void RenderInventoryPanel(InventorySlot[] uiSlot, ItemSlotData[] itemData)

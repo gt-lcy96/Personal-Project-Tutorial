@@ -265,4 +265,19 @@ public class InventoryManager : MonoBehaviour
 
         return false;
     }
+
+    public void ConsumeItem(ItemSlotData itemSlot)
+    {
+        if(itemSlot.IsEmpty())
+        {
+            Debug.LogError("There is nothing to consume");
+            return;
+        }
+
+        itemSlot.Remove();
+
+        //Refresh inventory
+        RenderItemOnHand();
+        UIManager.Instance.RenderInventory();
+    }
 }
