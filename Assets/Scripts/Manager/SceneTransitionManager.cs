@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
@@ -22,5 +23,9 @@ public class SceneTransitionManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void SwitchLocation(Location locationToSwitch)
+    {
+        SceneManager.LoadScene(locationToSwitch.ToString());
+    }
     
 }
