@@ -20,4 +20,12 @@ public class LocationManager : MonoBehaviour
         }
 
     }
+
+    //Find the player's start position based on where he come from
+    public Transform GetPlayerStartingPosition(SceneTransitionManager.Location enteringFrom)
+    {
+        //Tries to find the matching startpoint based on the location given
+        StartPoint startingPoint = startPoints.Find(x => x.enteringFrom == enteringFrom);
+        return startingPoint.playerStart;
+    }
 }

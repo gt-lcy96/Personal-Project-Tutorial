@@ -960,7 +960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoints:
   - enteringFrom: 0
-    playerStart: {fileID: 0}
+    playerStart: {fileID: 1864476606}
 --- !u!1 &1273734336
 GameObject:
   m_ObjectHideFlags: 0

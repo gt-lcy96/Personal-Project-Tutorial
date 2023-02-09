@@ -3868,9 +3868,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoints:
   - enteringFrom: 2
-    playerStart: {fileID: 0}
+    playerStart: {fileID: 326481463}
   - enteringFrom: 1
-    playerStart: {fileID: 0}
+    playerStart: {fileID: 2130535149}
 --- !u!1001 &217403924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6006,7 +6006,6 @@ GameObject:
   m_Component:
   - component: {fileID: 326481463}
   - component: {fileID: 326481465}
-  - component: {fileID: 326481464}
   m_Layer: 0
   m_Name: From Home
   m_TagString: Untagged
@@ -6029,19 +6028,6 @@ Transform:
   m_Father: {fileID: 216208637}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &326481464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326481462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e095bd0b0b1f4a24fb2890f8deee05b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationToSwitch: 2
 --- !u!65 &326481465
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9667,7 +9653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e095bd0b0b1f4a24fb2890f8deee05b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locationToSwitch: 2
+  locationToSwitch: 1
 --- !u!65 &576339978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37937,9 +37923,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2130535149}
   - component: {fileID: 2130535151}
-  - component: {fileID: 2130535150}
   m_Layer: 0
-  m_Name: From Home
+  m_Name: From Town
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37960,19 +37945,6 @@ Transform:
   m_Father: {fileID: 216208637}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &2130535150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130535148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e095bd0b0b1f4a24fb2890f8deee05b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationToSwitch: 2
 --- !u!65 &2130535151
 BoxCollider:
   m_ObjectHideFlags: 0
