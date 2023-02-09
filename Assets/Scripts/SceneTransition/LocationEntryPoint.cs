@@ -8,4 +8,11 @@ public class LocationEntryPoint : MonoBehaviour
     SceneTransitionManager.Location locationToSwitch;
     // Start is called before the first frame update
     
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            SceneTransitionManager.Instance.SwitchLocation(locationToSwitch);
+        }
+    }
 }
