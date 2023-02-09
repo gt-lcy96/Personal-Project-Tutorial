@@ -7,7 +7,7 @@ public class SceneTransitionManager : MonoBehaviour
 {
     public static SceneTransitionManager Instance;
 
-    public enum Location { FarmLand, FarmLand_Test, MyGame }
+    public enum Location { FarmLand, FarmLand_Test, Home }
 
     private void  Awake()
     {
