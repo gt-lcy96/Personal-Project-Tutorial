@@ -129,6 +129,11 @@ public class GameTimestamp
 
     public static int CompareTimestamps(GameTimestamp timestamp1, GameTimestamp timestamp2)
     {
+        if (timestamp1 == null || timestamp2 == null)
+        {
+            throw new System.ArgumentException("One of the timestamps is null");
+        }
+
         int difference = totalHours(timestamp1) - totalHours(timestamp2);
         return Mathf.Abs(difference);
     }
