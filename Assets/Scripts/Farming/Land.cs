@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Land : MonoBehaviour, ITimeTracker
 {
+    public int id;
     public enum LandStatus
     {
         Dirt, tilledLand, watered
