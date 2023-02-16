@@ -21,6 +21,8 @@ public class InventoryManager : MonoBehaviour
 
     public Transform handPoint;
 
+    public ItemIndex itemIndex;
+
     private void Awake()
     {
         // Singleton design

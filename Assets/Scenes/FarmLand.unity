@@ -1695,6 +1695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 85587287}
+  - component: {fileID: 85587288}
   m_Layer: 0
   m_Name: Lands
   m_TagString: Untagged
@@ -1738,6 +1739,18 @@ Transform:
   m_Father: {fileID: 1733837349}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85587288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85587286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d028da9972fad4d841f1040665f244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &87925390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3094196722147261405, guid: 557c1cc8f8072d44597d250d21f8ff30, type: 3}
@@ -38167,6 +38180,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4239588550345498646, guid: 866661c930f66364fbcb9424c81bfa82, type: 3}
+      propertyPath: itemIndex
+      value: 
+      objectReference: {fileID: 11400000, guid: d6358be71320dda4c982a2691666597f, type: 2}
     - target: {fileID: 5045182646792521024, guid: 866661c930f66364fbcb9424c81bfa82, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
