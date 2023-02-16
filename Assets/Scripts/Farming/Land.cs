@@ -39,8 +39,21 @@ public class Land : MonoBehaviour, ITimeTracker
         TimeManager.Instance.RegisterTracker(this);
     }
 
-    // Update is called once per frame
+    public void LoadLandData(LandStatus statusToSwitch, GameTimestamp lastWatered)
+    {
+        //Set land status accordingly
+        landStatus = statusToSwitch;
+        timeWatered = lastWatered;
+        _SwitchLandStatus(landStatus);
+    }
+    
+    
     public void SwitchLandStatus(LandStatus status)
+    {
+        _SwitchLandStatus(status);
+        LandManager.Instance.OnLandStateChange(id, landStatus, timeWatered);
+    }
+    private void _SwitchLandStatus(LandStatus status)
     {
         landStatus = status;
         Material material = dirtMat;
@@ -67,6 +80,7 @@ public class Land : MonoBehaviour, ITimeTracker
         }
 
         renderer.material = currentMaterial = material;
+        
     }
 
     public void Select(bool toggle)
@@ -128,7 +142,7 @@ public class Land : MonoBehaviour, ITimeTracker
             cropObject.transform.localPosition = new Vector3(0, 0.55f, 0);
 
             cropPlanted = cropObject.GetComponent<CropBehaviour>();
-            cropPlanted.Plant(seedTool);
+            cropPlanted.Plant(id, seedTool);
 
             
             InventoryManager.Instance.ConsumeItem(InventoryManager.Instance.GetEquippedSlot(InventorySlot.InventoryType.Tool));

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class CropBehaviour : MonoBehaviour
 {
+    int landID;  
     SeedData seedToGrow;
 
     [Header("Stages of Plant Life")]
@@ -27,8 +28,15 @@ public class CropBehaviour : MonoBehaviour
 
     //Initialisation for the crop GameObject
     // called when the player plant the seed
-    public void Plant(SeedData seedToGrow)
+    public void Plant(int landID, SeedData seedToGrow)
     {
+        LoadCrop(landID, seedToGrow, CropState.Seed, 0, 0);
+        LandManager.Instance.RegisterCrop(landID, seedToGrow, cropState, growth, health);
+    }
+
+    public void LoadCrop(int landID, SeedData seedToGrow, CropState cropState, int growth, int health)
+    {
+        this.landID = landID;
         this.seedToGrow = seedToGrow;
 
         seedling = Instantiate(seedToGrow.seedling, transform);
@@ -41,6 +49,9 @@ public class CropBehaviour : MonoBehaviour
         // game is update by minute, so convert it maxGrowth to minutes for easier calculate
         int hoursToGrow = GameTimestamp.DaysToHours(seedToGrow.daysToGrow);
         maxGrowth = GameTimestamp.HoursToMinutes(hoursToGrow);
+
+        this.growth = growth;
+        this.health = health;
 
         if(seedToGrow.regrowable)
         {
@@ -68,10 +79,13 @@ public class CropBehaviour : MonoBehaviour
             SwitchState(CropState.Seedling);
         }
 
+        //Grow from seedling to harvestable
         if(growth >= maxGrowth && cropState == CropState.Seedling)
         {
             SwitchState(CropState.Harvestable);
         }
+
+        LandManager.Instance.OnCropStateChange(landID, cropState, growth, health);
     }
 
     //The crop will progressively wither when the soil is dry
@@ -83,6 +97,8 @@ public class CropBehaviour : MonoBehaviour
         {
             SwitchState(CropState.Wilted);
         }
+
+        LandManager.Instance.OnCropStateChange(landID, cropState, growth, health);
     }
 
     private void SwitchState(CropState stateToSwitch)
@@ -130,5 +146,10 @@ public class CropBehaviour : MonoBehaviour
         growth = maxGrowth - GameTimestamp.HoursToMinutes(hoursToReGrow);
 
         SwitchState(CropState.Seedling);
+    }
+
+    void OnDestroy()
+    {
+        LandManager.Instance.DeregisterCrop(landID);
     }
 }
