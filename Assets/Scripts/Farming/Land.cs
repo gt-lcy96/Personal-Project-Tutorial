@@ -114,8 +114,10 @@ public class Land : MonoBehaviour, ITimeTracker
                     SwitchLandStatus(LandStatus.tilledLand);
                     break;
                 case EquipmentData.ToolType.WateringCan:
-
-                    SwitchLandStatus(LandStatus.watered);
+                    if(landStatus == LandStatus.tilledLand || landStatus == LandStatus.watered)
+                    {
+                        SwitchLandStatus(LandStatus.watered);
+                    }
                     break;
                 case EquipmentData.ToolType.Shovel:
                     if(cropPlanted != null)
