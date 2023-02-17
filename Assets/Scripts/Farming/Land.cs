@@ -68,18 +68,29 @@ public class Land : MonoBehaviour, ITimeTracker
             case LandStatus.watered:
                 //renderer.material cant be used to compare directly as it is Instance, so create currentMaterial
                 // only the tilled land can be watered
-                if(currentMaterial == tilledLandMat || currentMaterial == wateredMat)
+                // if(currentMaterial == tilledLandMat || currentMaterial == wateredMat)
+                if(landStatus == LandStatus.tilledLand || landStatus == LandStatus.watered)
                 {
                     material = wateredMat;
 
-                    //Cache the time it was watered
+                    //Cache or reset the time it was watered
                     timeWatered = TimeManager.Instance.GetGameTimestamp();
                     
                 }
                 break;
         }
 
-        renderer.material = currentMaterial = material;
+        try
+        {
+            renderer.material = material;
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("renderer.material" + renderer.material);
+            throw e;
+        }
+
+        Debug.Assert(renderer != null, "renderer shouldnt be null");
         
     }
 
@@ -123,7 +134,7 @@ public class Land : MonoBehaviour, ITimeTracker
                     if(cropPlanted != null)
                     {
                         //remove the crop from the land
-                        Destroy(cropPlanted.gameObject);
+                        cropPlanted.RemoveCrop();
                     }
                     break;
             }

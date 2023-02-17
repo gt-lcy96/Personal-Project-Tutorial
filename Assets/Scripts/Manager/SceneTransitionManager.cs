@@ -42,13 +42,13 @@ public class SceneTransitionManager : MonoBehaviour
     public void OnLocationLoad(Scene scene, LoadSceneMode mode)
     {
         //The location the player is coming from when the scene loads
-        Debug.Log("currentLocation 1:  " + currentLocation);
+        // Debug.Log("currentLocation 1:  " + currentLocation);
         Location oldLocation  = currentLocation;
-        Debug.Log("OnLocationLoad:  ");
+        // Debug.Log("OnLocationLoad:  ");
 
         //Get the new location by converting the string of our current scene into a location enum value
         Location newLocation = (Location) Enum.Parse(typeof(Location), scene.name);
-        Debug.Log("newLocation 1:  " + newLocation);
+        // Debug.Log("newLocation 1:  " + newLocation);
 
         // if the player is not coming from any location, stop the executing the function
         if (currentLocation == newLocation) return;
@@ -58,7 +58,7 @@ public class SceneTransitionManager : MonoBehaviour
         //Disable the players CharacterController component
         // CharacterController playerCharacter = playerPoint.GetComponent<CharacterController>();
         // playerCharacter.enabled = false;
-        Debug.Log("startPoint: " + startPoint);
+        // Debug.Log("startPoint: " + startPoint);
 
         //Change the player's position to the start point
         playerPoint.position = startPoint.position;

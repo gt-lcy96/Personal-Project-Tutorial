@@ -18,7 +18,7 @@ public class CropBehaviour : MonoBehaviour
     int maxGrowth;
 
     // The Crop can stay alive for 48 hours wihtout water before it dies
-    int maxHealth = GameTimestamp.HoursToMinutes(40);
+    int maxHealth = GameTimestamp.HoursToMinutes(48);
     int health;
     public enum CropState
     {
@@ -37,8 +37,10 @@ public class CropBehaviour : MonoBehaviour
     public void LoadCrop(int landID, SeedData seedToGrow, CropState cropState, int growth, int health)
     {
         this.landID = landID;
+        //Save the seed information
         this.seedToGrow = seedToGrow;
 
+        //instantiate the seedling and harvestable GameObjects
         seedling = Instantiate(seedToGrow.seedling, transform);
 
         //Access the crop item data
@@ -61,6 +63,7 @@ public class CropBehaviour : MonoBehaviour
 
         //Set the initial state to Seed
         SwitchState(CropState.Seed);
+        // SwitchState(cropState);
     }
 
     public void Grow()
@@ -125,7 +128,7 @@ public class CropBehaviour : MonoBehaviour
                 {
                     // unparent it before destroy the gameObject
                     harvestable.transform.parent = null;
-                    Destroy(gameObject);
+                    RemoveCrop();
                 }
                     break;
             case CropState.Wilted:
@@ -148,8 +151,9 @@ public class CropBehaviour : MonoBehaviour
         SwitchState(CropState.Seedling);
     }
 
-    void OnDestroy()
+    public void RemoveCrop()
     {
         LandManager.Instance.DeregisterCrop(landID);
+        Destroy(gameObject);
     }
 }
