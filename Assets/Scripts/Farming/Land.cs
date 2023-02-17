@@ -32,7 +32,7 @@ public class Land : MonoBehaviour, ITimeTracker
         renderer = GetComponent<Renderer>();
 
         //set default material for land status
-        SwitchLandStatus(LandStatus.Dirt);
+        _SwitchLandStatus(LandStatus.Dirt);
         Select(false);
 
         // Add this to TimeManager Listener List
