@@ -92,6 +92,15 @@ public class LandManager : MonoBehaviour
     public void ImportCropData(List<CropSaveState> cropDatasetToLoad)
     {
         cropData = cropDatasetToLoad;
+        foreach (CropSaveState cropSave in cropDatasetToLoad)
+        {
+            Land landToPlant = landPlots[cropSave.landID];
+
+            CropBehaviour cropToPlant = landToPlant.SpawnCrop();
+
+            SeedData seedToGrow = (SeedData) InventoryManager.Instance.itemIndex.GetItemFromString(cropSave.seedToGrow);
+            cropToPlant.LoadCrop(cropSave.landID, seedToGrow, cropSave.cropState, cropSave.growth, cropSave.health);
+        }
     }
 #endregion
     private void OnDestroy()
@@ -116,6 +125,5 @@ public class LandManager : MonoBehaviour
             ImportCropData(farmData.Item2);
         }
     }
-
     
 }

@@ -89,8 +89,6 @@ public class Land : MonoBehaviour, ITimeTracker
             Debug.Log("renderer.material" + renderer.material);
             throw e;
         }
-
-        Debug.Assert(renderer != null, "renderer shouldnt be null");
         
     }
 
@@ -151,10 +149,7 @@ public class Land : MonoBehaviour, ITimeTracker
         //3. There isn't already a crop that has been planted
         if(seedTool != null && landStatus != LandStatus.Dirt && cropPlanted == null)
         {
-            GameObject cropObject = Instantiate(cropPrefab, transform);
-            cropObject.transform.localPosition = new Vector3(0, 0.55f, 0);
-
-            cropPlanted = cropObject.GetComponent<CropBehaviour>();
+            SpawnCrop();
             cropPlanted.Plant(id, seedTool);
 
             
@@ -194,5 +189,15 @@ public class Land : MonoBehaviour, ITimeTracker
         }
     }
 
+    public CropBehaviour SpawnCrop()
+    {
+        GameObject cropObject = Instantiate(cropPrefab, transform);
 
+        //Move the crop object to the top of the land gameObject
+        cropObject.transform.localPosition = new Vector3(0, 0.55f, 0);
+
+        cropPlanted = cropObject.GetComponent<CropBehaviour>();
+
+        return cropPlanted;
+    }
 }
