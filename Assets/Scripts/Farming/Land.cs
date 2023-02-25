@@ -200,4 +200,9 @@ public class Land : MonoBehaviour, ITimeTracker
 
         return cropPlanted;
     }
+
+    private void OnDestroy()
+    {
+        TimeManager.Instance.UnregisterTracker(this);
+    }
 }
