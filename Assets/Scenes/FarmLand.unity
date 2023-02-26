@@ -38189,6 +38189,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4239588550345498644, guid: 866661c930f66364fbcb9424c81bfa82, type: 3}
+      propertyPath: m_Name
+      value: Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239588550345498644, guid: 866661c930f66364fbcb9424c81bfa82, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
