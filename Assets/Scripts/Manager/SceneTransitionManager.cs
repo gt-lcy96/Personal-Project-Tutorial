@@ -11,6 +11,8 @@ public class SceneTransitionManager : MonoBehaviour
     public enum Location { FarmLand, Town, Home }
     public Location currentLocation;
     Transform playerPoint;
+    private FadeScript fadeTransition;
+    GameObject fadeCanvas;
 
     private void  Awake()
     {
@@ -30,12 +32,29 @@ public class SceneTransitionManager : MonoBehaviour
 
         //Find the player's transform
         playerPoint = FindObjectOfType<PlayerController>().transform;
+        
+    }
+
+    void Start()
+    {
+        fadeTransition = GameObject.Find("Fade").GetComponent<FadeScript>();
+        fadeTransition.HideUI();
+    }
+
+    public IEnumerator ChangeScene(Location locationToSwitch)
+    {
+        if(fadeTransition != null){
+            fadeTransition.ShowUI();
+        }
+        yield return new WaitForSeconds(1f);
+        fadeTransition.HideUI();
+        SceneManager.LoadScene(locationToSwitch.ToString());
     }
 
     //Switch the player to another scene
     public void SwitchLocation(Location locationToSwitch)
     {
-        SceneManager.LoadScene(locationToSwitch.ToString());
+        StartCoroutine(ChangeScene(locationToSwitch));
     }
 
     //Called when a scene is loaded    
