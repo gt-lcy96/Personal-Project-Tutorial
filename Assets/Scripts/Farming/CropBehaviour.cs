@@ -62,8 +62,8 @@ public class CropBehaviour : MonoBehaviour
         }
 
         //Set the initial state to Seed
-        SwitchState(CropState.Seed);
-        // SwitchState(cropState);
+        // SwitchState(CropState.Seed);
+        SwitchState(cropState);
     }
 
     public void Grow()
