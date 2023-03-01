@@ -64,4 +64,9 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
             });
         }
     }
+
+    public void Sleep()
+    {
+        Debug.Log("Sleep");
+    }
 }

@@ -32,6 +32,10 @@ public class UIManager : MonoBehaviour, ITimeTracker
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescriptionText;
 
+
+    [Header("Yes No Prompt")]
+    public YesNoPrompt yesNoPrompt;
+
     private void Awake()
     {
         // Singleton design
@@ -53,6 +57,19 @@ public class UIManager : MonoBehaviour, ITimeTracker
         TimeManager.Instance.RegisterTracker(this);
     }
 
+    void Update()
+    {
+        RenderInventory();
+    }
+
+    public void TriggerYesNoPrompt(string message, System.Action onYesCallback)
+    {
+        yesNoPrompt.gameObject.SetActive(true);
+
+        yesNoPrompt.CreatePrompt(message, onYesCallback);
+    }
+
+#region Inventory
     public void AsignSlotIndexes()
     {
         for (int i = 0; i < toolSlots.Length; i++)
@@ -62,10 +79,7 @@ public class UIManager : MonoBehaviour, ITimeTracker
         }
     }
 
-    void Update()
-    {
-        RenderInventory();
-    }
+
     void RenderEquipTool(ItemData toolData)
     {
         // Text should be empty by default
@@ -134,7 +148,9 @@ public class UIManager : MonoBehaviour, ITimeTracker
         itemNameText.text = data.name;
         itemDescriptionText.text = data.descripton;
     }
+#endregion
 
+#region time
     public void ClockUpdate(GameTimestamp timestamp)
     {
         // Handle the time
@@ -161,4 +177,5 @@ public class UIManager : MonoBehaviour, ITimeTracker
         // Format it for the date text display
         dateText.text = $"{season} {day} ({dayOfTheWeek})";
     }
+#endregion
 }
